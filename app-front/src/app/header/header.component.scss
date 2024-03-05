@@ -1,20 +1,28 @@
 .spacer1 {
     flex: 1 1 auto;
 }
-.spacer{
-    flex: 1 ;
+.spacer {
+    margin-right: 10px;
+    /* Adjust the spacing as needed */
 }
 
-
-.title {
-    flex: 1;
-    text-align: center;
+.custom-button {
+    border-radius: 40px;
+    /* Adjust border radius as needed */
+    margin: 0 5px;
+    /* Adjust margin as needed */
+    min-width: 80px;
+    /* Adjust button width as needed */
 }
-.title {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
 
-.login-buttons {
-    margin-left: auto;
+.custom-button.mat-raised-button {
+    box-shadow: none;
+    /* Remove default box shadow */
+}
+.custom-button.mat-raised-button:hover,
+.custom-button.mat-raised-button:focus {
+    background-color: #fa0707 !important;
+    /* Change hover/focus background color */
+    box-shadow: none !important;
+    /* Remove box shadow on hover/focus */
 }

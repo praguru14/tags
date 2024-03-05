@@ -1,14 +1,16 @@
-<mat-toolbar color="primary">
-        <span>(Logo)</span>
-    <span style="margin-left: 550px;"></span>
+<mat-toolbar color="primary" class="mat-elevation-z10">
+    <span><mat-icon>loyalty</mat-icon>(Logo)</span>
+    <span style="margin-left: 750px;"></span>
     <span fxFlex="1"></span>
     <span class="title">Name</span>
     <span fxFlex fxLayoutAlign="end">
-        <a mat-button>Home</a>
-        <a mat-button>Info</a>
-        <a mat-button>Setup</a>
-        <a mat-button>Contact</a>
-        <a mat-button>Login</a>
-        <a mat-button>Signup</a>
+        <a mat-button [routerLink]="['/home']" routerLinkActive="router-link-active"  > Home</a>
+        <a mat-button [routerLink]="['/product-info']" routerLinkActive="router-link-active" >Info</a>
+        <a mat-button [routerLink]="['/setup']" routerLinkActive="router-link-active" >Setup</a>
+        <a mat-button [routerLink]="['/contact-us']" routerLinkActive="router-link-active" >Contact</a>
+
+        <button mat-raised-button color="accent" class="custom-button">Login</button>
+        <span class="spacer"></span> <!-- Add a spacer between Contact and Login -->
+        <button mat-raised-button color="accent" class="custom-button">Signup</button>
     </span>
 </mat-toolbar>
