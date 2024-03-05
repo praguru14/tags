@@ -22,7 +22,7 @@ public class GenericController
 				HttpStatus.OK);
 	}
 
-	@PostMapping(value = "add-user", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/add-user", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DataMessage> addUpdateUserDetails(@RequestBody UserModel userModel) throws Exception {
 		return new ResponseEntity<DataMessage>(new DataMessage(HttpStatus.OK, userService.addUpdateUserDetails(userModel)),
 				HttpStatus.OK);
