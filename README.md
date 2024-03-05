@@ -88,10 +88,3 @@ Before running the application, ensure you have the following installed:
 - The Angular frontend communicates with the Spring Boot backend through REST APIs.
 - Default port for the backend is `8080` and for the frontend is `4200`.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Support
-
-For any questions or issues, please [open an issue](https://github.com/your-username/your-project-name/issues) or contact us directly.
