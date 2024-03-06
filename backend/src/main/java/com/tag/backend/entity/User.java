@@ -48,7 +48,7 @@ public class User
 	private String lastName;
 
 	@NotBlank
-	@Size(max =3,message = "Invalid blood group")
+	@Size(max =3)
 	@Pattern(regexp = "^(A\\+|A\\-|B\\+|B\\-|O\\+|O\\-|AB\\+|AB\\-)$", message = "Invalid blood group")
 	private String bloodGroup;
 

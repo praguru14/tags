@@ -7,23 +7,31 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
 import com.google.api.client.http.HttpResponseException;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestControllerAdvice
 public class ExceptionHandlers {
-    @ExceptionHandler(value = ConstraintViolationException.class)
-    public ResponseEntity<?> constraintViolation(RuntimeException exp) {
-        ConstraintViolationException consEx = (ConstraintViolationException) exp;
-        String errors = "";
-        int count = 1;
-        for (final ConstraintViolation<?> violation : consEx.getConstraintViolations()) {
-            errors = errors + " Field(" + count + "): " + violation.getMessage();
-            count++;
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> handleConstraintViolationExceptions(ConstraintViolationException ex) {
+        List<Map<String, String>> errorList = new ArrayList<>();
+        for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
+            Map<String, String> error = new HashMap<>();
+            error.put("fieldName", violation.getPropertyPath().toString());
+            error.put("errorMessage", violation.getMessage());
+            errorList.add(error);
         }
-        return new ResponseEntity<Object>(new Message(HttpStatus.BAD_REQUEST, errors), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(errorList);
     }
 
     @ExceptionHandler(value = {InvalidDataException.class})
@@ -59,11 +67,9 @@ public class ExceptionHandlers {
             message = "Phone Number already exists";
         } else if (duplicateEmail) {
             message = "Email already exists";
-        }
-        else if(ex.getMessage().contains("Data too long")){
-            message ="Size of the data is too long";
-        }
-        else{
+        } else if (ex.getMessage().contains("Data too long")) {
+            message = "Size of the data is too long";
+        } else {
             message = "Data already exists";
         }
         return ResponseEntity.status(HttpStatus.CONFLICT)
