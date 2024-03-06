@@ -10,7 +10,7 @@ public class UserModel
 {
 	private long id;
 	private String email;
-	private long phone;
+	private String phone;
 	private String firstName;
 	private String lastName;
 	private String bloodGroup;
