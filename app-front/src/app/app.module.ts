@@ -17,6 +17,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { FooterComponent } from './homepage/footer/footer.component';
 import { ProfileComponent } from './profile/profile.component'
 import { HttpClientModule } from '@angular/common/http';
+import { GeolocationComponent } from './geolocation/geolocation.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomepageComponent,
     FooterComponent,
     ProfileComponent,
+    GeolocationComponent,
   ],
   imports: [
     BrowserModule,
