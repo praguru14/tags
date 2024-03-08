@@ -42,5 +42,4 @@ public class GenericController {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(new DataMessage(HttpStatus.OK, users, (long) users.size()));
     }
-
 }
