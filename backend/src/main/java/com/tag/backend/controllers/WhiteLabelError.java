@@ -16,4 +16,9 @@ public class WhiteLabelError implements ErrorController {
     public String handleError() {
         return "error";
     }
+
+    @GetMapping("/")
+    public String home() {
+        return "index";
+    }
 }
