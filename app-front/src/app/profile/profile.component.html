@@ -1,10 +1,10 @@
 <div class="container profile">
-    <form method="post">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <img class="square" src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="">
         </div>
         <div class="row">
-            <h2 class="center-text">{{userObj.data.firstName}} {{userObj.data.lastName}}</h2>
+            <h2 class="center-text">{{userObj.firstName}} {{userObj.lastName}}</h2>
         </div>
         <div class="row">
             <p class="center-text">27 Years and 15 days old</p>
@@ -18,292 +18,39 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label class="label-text">First Name: </label>
-                            <label>{{userObj.data.firstName}}</label>
+                            <input class="input-text" formControlName="firstName" >
                         </div>
                         <div class="col-md-4">
                             <label class="label-text">Middle Name: </label>
-                            <label>{{userObj.data.middleName}}</label>
+                            <input class="input-text" formControlName="middleName" >
                         </div>
                         <div class="col-md-4">
                             <label class="label-text">Last Name: </label>
-                            <label>{{userObj.data.lastName}}</label>
+                            <input class="input-text" formControlName="lastName" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <label class="label-text">Phone: </label>
-                            <label>{{userObj.data.phone}}</label>
+                            <input class="input-text" formControlName="phone" >
                         </div>
                         <div class="col-md-4">
                             <label class="label-text">Email: </label>
-                            <label>{{userObj.data.email}}</label>
+                            <input class="input-text" formControlName="email" >
+                            <p *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                                Please provide a valid email address.
+                            </p>
                         </div>
                         <div class="col-md-4">
                             <label class="label-text">Blood Group: </label>
-                            <label>{{userObj.data.bloodGroup}}</label>
+                            <input class="input-text" formControlName="bloodGroup" >
                         </div>
                     </div>
                 </div>
               </div>
         </div>
         <div class="row">
-            <div class="card">
-                <div class="card-header">
-                  Emergency Contacts
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">First Name: </label>
-                            <label>{{userObj.data.firstName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Middle Name: </label>
-                            <label>{{userObj.data.middleName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Last Name: </label>
-                            <label>{{userObj.data.lastName}}</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">Phone: </label>
-                            <label>{{userObj.data.phone}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Email: </label>
-                            <label>{{userObj.data.email}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Blood Group: </label>
-                            <label>{{userObj.data.bloodGroup}}</label>
-                        </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-        <div class="row">
-            <div class="card">
-                <div class="card-header">
-                  Address
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">First Name: </label>
-                            <label>{{userObj.data.firstName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Middle Name: </label>
-                            <label>{{userObj.data.middleName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Last Name: </label>
-                            <label>{{userObj.data.lastName}}</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">Phone: </label>
-                            <label>{{userObj.data.phone}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Email: </label>
-                            <label>{{userObj.data.email}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Blood Group: </label>
-                            <label>{{userObj.data.bloodGroup}}</label>
-                        </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-        <div class="row">
-            <div class="card">
-                <div class="card-header">
-                  Allergies
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">First Name: </label>
-                            <label>{{userObj.data.firstName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Middle Name: </label>
-                            <label>{{userObj.data.middleName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Last Name: </label>
-                            <label>{{userObj.data.lastName}}</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">Phone: </label>
-                            <label>{{userObj.data.phone}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Email: </label>
-                            <label>{{userObj.data.email}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Blood Group: </label>
-                            <label>{{userObj.data.bloodGroup}}</label>
-                        </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-        <div class="row">
-            <div class="card">
-                <div class="card-header">
-                  Medication
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">First Name: </label>
-                            <label>{{userObj.data.firstName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Middle Name: </label>
-                            <label>{{userObj.data.middleName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Last Name: </label>
-                            <label>{{userObj.data.lastName}}</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">Phone: </label>
-                            <label>{{userObj.data.phone}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Email: </label>
-                            <label>{{userObj.data.email}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Blood Group: </label>
-                            <label>{{userObj.data.bloodGroup}}</label>
-                        </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-        <div class="row">
-            <div class="card">
-                <div class="card-header">
-                  Health Insurance
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">First Name: </label>
-                            <label>{{userObj.data.firstName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Middle Name: </label>
-                            <label>{{userObj.data.middleName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Last Name: </label>
-                            <label>{{userObj.data.lastName}}</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">Phone: </label>
-                            <label>{{userObj.data.phone}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Email: </label>
-                            <label>{{userObj.data.email}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Blood Group: </label>
-                            <label>{{userObj.data.bloodGroup}}</label>
-                        </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-        <div class="row">
-            <div class="card">
-                <div class="card-header">
-                  Vital Medical Conditions
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">First Name: </label>
-                            <label>{{userObj.data.firstName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Middle Name: </label>
-                            <label>{{userObj.data.middleName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Last Name: </label>
-                            <label>{{userObj.data.lastName}}</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">Phone: </label>
-                            <label>{{userObj.data.phone}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Email: </label>
-                            <label>{{userObj.data.email}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Blood Group: </label>
-                            <label>{{userObj.data.bloodGroup}}</label>
-                        </div>
-                    </div>
-                </div>
-              </div>
-        </div>
-        <div class="row">
-            <div class="card">
-                <div class="card-header">
-                  Nearby Emergency Services
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">First Name: </label>
-                            <label>{{userObj.data.firstName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Middle Name: </label>
-                            <label>{{userObj.data.middleName}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Last Name: </label>
-                            <label>{{userObj.data.lastName}}</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="label-text">Phone: </label>
-                            <label>{{userObj.data.phone}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Email: </label>
-                            <label>{{userObj.data.email}}</label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Blood Group: </label>
-                            <label>{{userObj.data.bloodGroup}}</label>
-                        </div>
-                    </div>
-                </div>
-              </div>
+            <button type="submit" [disabled]="userForm.invalid">Submit</button>
         </div>
     </form>           
 </div>

@@ -4,6 +4,7 @@ export class User
     email!: string;
     phone!: number;
     firstName!: string;
+    middleName!: string;
     lastName!: string;
     bloodGroup!: string;        
 }
