@@ -16,7 +16,8 @@ import { AngularMaterialModule } from '../../angular-material.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FooterComponent } from './homepage/footer/footer.component';
 import { ProfileComponent } from './profile/profile.component'
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpRequestInterceptor } from './services/interceptor.service';
 
 
 @NgModule({
@@ -43,7 +44,12 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
