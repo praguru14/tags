@@ -12,7 +12,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -27,7 +26,6 @@ public class GenericController {
     private UserService userService;
 
     @GetMapping(value = "/fetch-user-by-id", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<DataMessage> fetchUserById(@RequestParam long userId) throws Exception {
         return new ResponseEntity<DataMessage>(new DataMessage(HttpStatus.OK, userService.fetchUserById(userId)),
                 HttpStatus.OK);
@@ -40,7 +38,6 @@ public class GenericController {
     }
 
     @GetMapping(value = "/get-all-users", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<DataMessage> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(new DataMessage(HttpStatus.OK, users, (long) users.size()));

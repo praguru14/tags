@@ -4,7 +4,6 @@ import com.tag.backend.model.Ip2LocationResponse;
 import com.tag.backend.model.LocationPayload;
 import com.tag.backend.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +15,6 @@ public class LocationController {
     LocationService locationService;
 
     @PostMapping("/tag/loc")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public String receiveLocation(@RequestBody LocationPayload payload) {
         String ip = locationService.getClientIp();
         String googleMapsUrl = "https://www.google.com/maps?q=" + payload.getLatitude() + "," + payload.getLongitude();
