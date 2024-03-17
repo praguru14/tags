@@ -86,4 +86,15 @@ public class LoginService {
                 .bloodGroup(loginModel.getBloodGroup())
                 .build();
     }
+
+    public DataMessage updatePassword(String email, String currentPassword, String newPassword) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, currentPassword));
+        Login user = loginRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setPassword(passwordEncoder.encode(newPassword));
+        loginRepository.save(user);
+        String jwtToken = jwtService.generateToken(user);
+        return new DataMessage(HttpStatus.OK, null, "Password updated successfully", jwtToken);
+    }
+
+
 }
