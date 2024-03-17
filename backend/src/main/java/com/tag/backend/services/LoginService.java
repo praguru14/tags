@@ -1,5 +1,6 @@
 package com.tag.backend.services;
 
+import com.tag.backend.Enum.Roles;
 import com.tag.backend.entity.Login;
 import com.tag.backend.entity.User;
 import com.tag.backend.exceptionhandling.InvalidDataException;
@@ -29,6 +30,7 @@ public class LoginService {
     private final UsersRepository usersRepository;
     @Autowired
     private final UserService userService;
+    @Autowired
     private final PasswordEncoder passwordEncoder;
     @Autowired
     private final AuthenticationManager authenticationManager;
@@ -39,21 +41,14 @@ public class LoginService {
         if (loginModel == null) {
             throw new InvalidDataException("Please provide user details");
         }
-        Login login = Login.builder()
-                .firstName(loginModel.getFirstName())
-                .lastName(loginModel.getLastName())
-                .phone(loginModel.getPhone())
-                .email(loginModel.getEmail())
-                .password(passwordEncoder.encode(loginModel.getPassword()))
-                .roles(loginModel.getRoles())
-                .bloodGroup(loginModel.getBloodGroup())
-                .build();
-        loginRepository.save(login);
-        User user = createUserFromLoginModel(loginModel);
-        usersRepository.save(user);
-        var jwtToken = jwtService.generateToken(login);
-        System.out.println(jwtToken);
-        return new DataMessage(HttpStatus.CREATED, user, "User created successfully", jwtToken);
+        Roles roles = (loginModel.getRoles() == null) ? Roles.USER : Roles.ADMIN;
+        Login loginData =  createLogin(loginModel,roles);
+            loginRepository.save(loginData);
+            User user = createUserFromLoginModel(loginModel);
+            usersRepository.save(user);
+            var jwtToken = jwtService.generateToken(loginData);
+            System.out.println(jwtToken);
+            return new DataMessage(HttpStatus.CREATED, user, "User created successfully", jwtToken);
     }
 
     public DataMessage getUser(Login login) {
@@ -78,5 +73,17 @@ public class LoginService {
         user.setLastName(loginModel.getLastName());
         user.setBloodGroup(loginModel.getBloodGroup());
         return user;
+    }
+
+    private Login createLogin(Login loginModel, Roles role) {
+        return Login.builder()
+                .firstName(loginModel.getFirstName())
+                .lastName(loginModel.getLastName())
+                .phone(loginModel.getPhone())
+                .email(loginModel.getEmail())
+                .password(passwordEncoder.encode(loginModel.getPassword()))
+                .roles(role)
+                .bloodGroup(loginModel.getBloodGroup())
+                .build();
     }
 }
