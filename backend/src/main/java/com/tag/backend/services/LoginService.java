@@ -9,22 +9,30 @@ import com.tag.backend.repository.UsersRepository;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Data
 @Builder
 @RequiredArgsConstructor
 public class LoginService {
-
+    @Autowired
     private final LoginRepository loginRepository;
+    @Autowired
     private final UsersRepository usersRepository;
+    @Autowired
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    @Autowired
     private final AuthenticationManager authenticationManager;
+    @Autowired
     private final JwtService jwtService;
 
     public DataMessage addUser(Login loginModel) {
@@ -45,21 +53,22 @@ public class LoginService {
         usersRepository.save(user);
         var jwtToken = jwtService.generateToken(login);
         System.out.println(jwtToken);
-        return DataMessage.builder().accessToken(jwtToken).build();
-
+        return new DataMessage(HttpStatus.CREATED, user, "User created successfully", jwtToken);
     }
 
-public DataMessage authenticate(Login loginModel){
-    authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                    loginModel.getEmail(),
-                    loginModel.getPassword()
-            )
-    );
-    var user = loginRepository.findByEmail(loginModel.getEmail()).orElseThrow();
-    var jwtToken = jwtService.generateToken(user);
-    return DataMessage.builder().accessToken(jwtToken).build();
-}
+    public DataMessage getUser(Login login) {
+        Optional<User> user = usersRepository.findByEmailAndPhone(login.getEmail(), login.getPhone());
+        var jwtToken = jwtService.generateToken(login);
+        return new DataMessage(HttpStatus.CREATED, user, "User already exist", jwtToken);
+    }
+
+    public DataMessage authenticate(Login loginModel) {
+        System.out.println(loginModel);
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
+        var user = loginRepository.findByEmail(loginModel.getEmail()).orElseThrow();
+        var jwtToken = jwtService.generateToken(user);
+        return new DataMessage(HttpStatus.CREATED, user, "User auth successfully", jwtToken);
+    }
 
     private User createUserFromLoginModel(Login loginModel) {
         User user = new User();

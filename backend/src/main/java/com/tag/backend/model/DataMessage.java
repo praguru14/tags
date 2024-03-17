@@ -1,11 +1,10 @@
 package com.tag.backend.model;
 
 import java.io.Serializable;
-import java.util.Optional;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.tag.backend.entity.Login;
 import com.tag.backend.entity.User;
 import org.springframework.http.HttpStatus;
 import lombok.Getter;
