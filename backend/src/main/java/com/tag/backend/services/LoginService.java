@@ -7,17 +7,27 @@ import com.tag.backend.exceptionhandling.InvalidDataException;
 import com.tag.backend.model.DataMessage;
 import com.tag.backend.repository.LoginRepository;
 import com.tag.backend.repository.UsersRepository;
+import com.tag.backend.utils.EmailUtil;
+import com.tag.backend.utils.OtpUtil;
+import jakarta.mail.MessagingException;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Optional;
+
+import static java.lang.System.*;
 
 @Service
 @Data
@@ -36,6 +46,10 @@ public class LoginService {
     private final AuthenticationManager authenticationManager;
     @Autowired
     private final JwtService jwtService;
+    @Autowired
+    private final OtpUtil otpUtil;
+    @Autowired
+    private final EmailUtil emailUtil;
 
     public DataMessage addUser(Login loginModel) {
         if (loginModel == null) {
@@ -47,7 +61,6 @@ public class LoginService {
             User user = createUserFromLoginModel(loginModel);
             usersRepository.save(user);
             var jwtToken = jwtService.generateToken(loginData);
-            System.out.println(jwtToken);
             return new DataMessage(HttpStatus.CREATED, user, "User created successfully", jwtToken);
     }
 
@@ -58,9 +71,12 @@ public class LoginService {
     }
 
     public DataMessage authenticate(Login loginModel) {
-        System.out.println(loginModel);
+        out.println(loginModel);
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
         var user = loginRepository.findByEmail(loginModel.getEmail()).orElseThrow();
+        if(!user.isVerified()){
+            return new DataMessage(HttpStatus.CREATED, "Verify yourself");
+        }
         var jwtToken = jwtService.generateToken(user);
         return new DataMessage(HttpStatus.CREATED, user, "User auth successfully", jwtToken);
     }
@@ -76,7 +92,15 @@ public class LoginService {
     }
 
     private Login createLogin(Login loginModel, Roles role) {
-        return Login.builder()
+        String otp = otpUtil.generateOtp();
+        out.println(otp);
+        try{
+            emailUtil.sendOtpEmail(loginModel.getEmail(), otp);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Unable to send OTP at the moment");
+        }
+        Login data;
+        data = Login.builder()
                 .firstName(loginModel.getFirstName())
                 .lastName(loginModel.getLastName())
                 .phone(loginModel.getPhone())
@@ -84,6 +108,68 @@ public class LoginService {
                 .password(passwordEncoder.encode(loginModel.getPassword()))
                 .roles(role)
                 .bloodGroup(loginModel.getBloodGroup())
+                .otp(otp)
+                .otpGeneratedTime(LocalDateTime.now())
                 .build();
+        return data;
+
+    }
+
+    public DataMessage updatePassword(String email, String currentPassword, String newPassword) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, currentPassword));
+        Login user = loginRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setPassword(passwordEncoder.encode(newPassword));
+        loginRepository.save(user);
+        String jwtToken = jwtService.generateToken(user);
+        return new DataMessage(HttpStatus.OK, null, "Password updated successfully", jwtToken);
+    }
+
+    public DataMessage updatePassword(Object email){
+        return new DataMessage(HttpStatus.OK,"Password update successfully for : " +email);
+    }
+
+    public String verifyAccount(String email, String otp) {
+        Login userByEmail = loginRepository.findByEmail(email).orElseThrow(()->new RuntimeException("User not found : "+email));
+            if(userByEmail.getOtp().equals(otp) && Duration.between(userByEmail.getOtpGeneratedTime(),LocalDateTime.now()).getSeconds()<(10*60)){
+                userByEmail.setVerified(true);
+                loginRepository.save(userByEmail);
+                if(userByEmail.isVerified()){
+                  User user = usersRepository.findByEmail(email);
+                    user.setIsVerified(true);
+                 usersRepository.save(user);
+
+                }
+                return "OTP verified";
+            }
+        return "Please regenerate OTP";
+    }
+
+
+    public String regenerateOtp(String email) {
+        Login user = loginRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found with this email: " + email));
+        String otp = otpUtil.generateOtp();
+        try {
+            emailUtil.sendOtpEmail(email, otp);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Unable to send otp please try again");
+        }
+        user.setOtp(otp);
+        user.setOtpGeneratedTime(LocalDateTime.now());
+        loginRepository.save(user);
+        return "Email sent... please verify account within 1 minute";
+    }
+
+    public String forgotPassword(String email) throws MessagingException {
+       Login user = loginRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found: "+email));
+       emailUtil.resetPassword(email);
+       return "Email sent, Kindly check your email";
+    }
+
+    public String resetPassword(String email, String newPassword) {
+        Login user = loginRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found: "+email));
+        user.setPassword(passwordEncoder.encode(newPassword));
+        loginRepository.save(user);
+        return "New password set";
     }
 }

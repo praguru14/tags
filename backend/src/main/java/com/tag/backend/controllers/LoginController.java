@@ -7,13 +7,12 @@ import com.tag.backend.model.UserModel;
 import com.tag.backend.repository.LoginRepository;
 import com.tag.backend.repository.UsersRepository;
 import com.tag.backend.services.LoginService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -29,7 +28,7 @@ public class LoginController {
     @Autowired
     private UsersRepository usersRepository;
 
-    @PostMapping(value = "login",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/register",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DataMessage> login(@RequestBody Login login){
         if(login!=null){
             Optional<Login>  existingLogin = loginRepository.findByEmailAndPhone(login.getEmail(), login.getPhone());
@@ -47,51 +46,29 @@ public class LoginController {
         return null;
     }
 
-//    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<DataMessage> addLoginOrUpdate(@RequestBody Login loginModel) throws Exception {
-//        if (loginModel != null) {
-//            Optional<Login> existingLogin = loginRepository.findByEmailAndPhone(loginModel.getEmail(), loginModel.getPhone());
-//            if (existingLogin.isPresent()) {
-//                Optional<User> userExist = usersRepository.findByEmailAndPhone(loginModel.getEmail(), loginModel.getPhone());
-//                if (userExist.isPresent()) {
-//                    User existingUser = userExist.get();
-//                    UserModel userModel = new UserModel();
-//                    userModel.setId(existingUser.getId());
-//                    userModel.setEmail(existingUser.getEmail());
-//                    userModel.setPhone(existingUser.getPhone());
-//                    userModel.setFirstName(existingUser.getFirstName());
-//                    userModel.setBloodGroup(existingUser.getBloodGroup());
-//
-//                    // Retrieve access token from DataMessage returned by addUser method
-//                    DataMessage addUserResponse = loginService.addUser(loginModel);
-//                    String accessToken = addUserResponse.getAccessToken();
-//
-//                    return new ResponseEntity<>(new DataMessage(HttpStatus.OK, userModel, "User already exists", accessToken), HttpStatus.OK);
-//                } else {
-//                    return new ResponseEntity<>(new DataMessage(HttpStatus.NOT_FOUND, "User not found"), HttpStatus.NOT_FOUND);
-//                }
-//            } else {
-//                Object newUser = loginService.addUser(loginModel);
-//                if (newUser instanceof DataMessage) {
-//                    // If the newUser is an instance of DataMessage, retrieve the access token from it
-//                    DataMessage addUserResponse = (DataMessage) newUser;
-//                    String accessToken = addUserResponse.getAccessToken();
-//                    return new ResponseEntity<>(new DataMessage(HttpStatus.CREATED, addUserResponse.getData(), "User created successfully", accessToken), HttpStatus.CREATED);
-//                } else {
-//                    // Handle the case when the newUser is not an instance of DataMessage
-//                    return new ResponseEntity<>(new DataMessage(HttpStatus.CREATED, newUser, "User created successfully", ""), HttpStatus.CREATED);
-//                }
-//            }
-//        }
-//        return new ResponseEntity<>(new DataMessage(HttpStatus.INTERNAL_SERVER_ERROR, "Bad request"), HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-
-
-
-    @PostMapping(value = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
-
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DataMessage> authenticate(@RequestBody Login loginModel) {
         return ResponseEntity.ok(loginService.authenticate(loginModel));
+    }
+
+    @PostMapping("/verify-account")
+    public  ResponseEntity<String> verifyAccount(@RequestParam String email,@RequestParam String otp){
+        return new ResponseEntity<>(loginService.verifyAccount(email,otp),HttpStatus.OK);
+    }
+
+    @PostMapping("/regenerate-otp")
+    public ResponseEntity<String> regenerateOtp(@RequestParam String email) {
+        return new ResponseEntity<>(loginService.regenerateOtp(email), HttpStatus.OK);
+    }
+
+    @PostMapping("/forget-password")
+    public ResponseEntity<String> forgotPassword(@RequestParam String email) throws MessagingException {
+        return new ResponseEntity<>(loginService.forgotPassword(email),HttpStatus.OK);
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestParam String email,@RequestHeader String newPassword) throws MessagingException {
+        return new ResponseEntity<>(loginService.resetPassword(email,newPassword),HttpStatus.OK);
     }
 }
 

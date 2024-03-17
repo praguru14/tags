@@ -6,20 +6,17 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "login")
@@ -59,9 +56,39 @@ public class Login implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Roles roles;
 
+    private String otp;
+
+    private LocalDateTime otpGeneratedTime;
+
+    private boolean isVerified;
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
+
+    public Login(Long id, String email, String phone, String firstName, String lastName, String password, String bloodGroup, Roles roles, String otp, LocalDateTime otpGeneratedTime, boolean isVerified) {
+        this.id = id;
+        this.email = email;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.bloodGroup = bloodGroup;
+        this.roles = roles;
+        this.otp = otp;
+        this.otpGeneratedTime = otpGeneratedTime;
+        this.isVerified = isVerified;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
+
+
 
     public static class Builder {
         private Long id;
@@ -72,6 +99,10 @@ public class Login implements UserDetails {
         private String password;
         private String bloodGroup;
         private Roles roles;
+        private String otp;
+        private LocalDateTime otpGeneratedTime;
+        private boolean isVerified;
+
 
         public Builder id(Long id) {
             this.id = id;
@@ -113,14 +144,27 @@ public class Login implements UserDetails {
             return this;
         }
 
+
+        public Builder otp(String otp) {
+            this.otp = otp;
+            return this;
+        }
+
+        public Builder otpGeneratedTime(LocalDateTime otpGeneratedTime) {
+            this.otpGeneratedTime = otpGeneratedTime;
+            return this;
+        }
+
+
+        public Builder isVerified(boolean isVerified) {
+            this.isVerified = isVerified;
+            return this;
+        }
+
         public Login build() {
-            return new Login(id, email, phone, firstName, lastName, password, bloodGroup, roles);
+            return new Login(id, email, phone, firstName, lastName, password, bloodGroup, roles, otp, otpGeneratedTime,isVerified);
         }
     }
-
-    // Other methods (getters, setters, UserDetails methods) remain the same
-
-
 
 @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

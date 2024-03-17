@@ -21,7 +21,7 @@ public class DataMessage implements Serializable {
     private String rideId;
     private Long totalResults;
     private String accessToken;
-
+    private EmailModel emailModel;
 
     public DataMessage(HttpStatus status, Object data, String message, String accessToken) {
         this.status = status;
@@ -55,6 +55,12 @@ public class DataMessage implements Serializable {
     }
 
     public DataMessage() {
+    }
+
+    public DataMessage(HttpStatus httpStatus, String emailSent, EmailModel emailModel) {
+        this.status = httpStatus;
+        this.message = emailSent;
+        this.emailModel = emailModel;
     }
 
     public static Builder builder() {
