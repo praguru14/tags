@@ -124,9 +124,6 @@ public class LoginService {
         return new DataMessage(HttpStatus.OK, null, "Password updated successfully", jwtToken);
     }
 
-    public DataMessage updatePassword(Object email){
-        return new DataMessage(HttpStatus.OK,"Password update successfully for : " +email);
-    }
 
     public String verifyAccount(String email, String otp) {
         Login userByEmail = loginRepository.findByEmail(email).orElseThrow(()->new RuntimeException("User not found : "+email));
@@ -161,7 +158,7 @@ public class LoginService {
     }
 
     public String forgotPassword(String email) throws MessagingException {
-       Login user = loginRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found: "+email));
+        loginRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found: "+email));
        emailUtil.resetPassword(email);
        return "Email sent, Kindly check your email";
     }
@@ -173,14 +170,6 @@ public class LoginService {
         return "New password set";
     }
 
-    public DataMessage updatePassword(String email, String currentPassword, String newPassword) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, currentPassword));
-        Login user = loginRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
-        user.setPassword(passwordEncoder.encode(newPassword));
-        loginRepository.save(user);
-        String jwtToken = jwtService.generateToken(user);
-        return new DataMessage(HttpStatus.OK, null, "Password updated successfully", jwtToken);
-    }
 
 
 }
