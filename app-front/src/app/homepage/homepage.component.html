@@ -73,6 +73,16 @@
 
 <div class="main-body">
 
+    <!-- Loading spinner -->
+    <div *ngIf="loading" class="loading-container flex-content-center">
+        <!-- <div>
+            <mat-progress-spinner
+        color="primary"
+        mode="indeterminate">
+        </mat-progress-spinner>
+        </div> -->
+        <div class="loader"></div>
+    </div>
     <router-outlet></router-outlet>
 
 </div>

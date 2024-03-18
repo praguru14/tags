@@ -18,6 +18,8 @@ import { FooterComponent } from './homepage/footer/footer.component';
 import { ProfileComponent } from './profile/profile.component'
 import { HttpClientModule } from '@angular/common/http';
 import { GeolocationComponent } from './geolocation/geolocation.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpRequestInterceptor } from './services/interceptor.service';
 
 
 @NgModule({
@@ -45,7 +47,12 @@ import { GeolocationComponent } from './geolocation/geolocation.component';
     HttpClientModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
