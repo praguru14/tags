@@ -16,8 +16,11 @@ import { AngularMaterialModule } from '../../angular-material.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FooterComponent } from './homepage/footer/footer.component';
 import { ProfileComponent } from './profile/profile.component'
+// import { HttpClientModule } from '@angular/common/http';
+import { GeolocationComponent } from './geolocation/geolocation.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpRequestInterceptor } from './services/interceptor.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -26,6 +29,8 @@ import { HttpRequestInterceptor } from './services/interceptor.service';
     HomepageComponent,
     FooterComponent,
     ProfileComponent,
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,

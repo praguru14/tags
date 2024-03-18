@@ -55,7 +55,6 @@ public class ExceptionHandlers {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<DataMessage> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         String message = "";
-        boolean valid = true;
         int firstIndex = ex.getMessage().indexOf("'");
         int secondIndex = ex.getMessage().indexOf("'", firstIndex + 1);
         boolean duplicateEmail = ex.getMessage().substring(firstIndex + 1, ex.getMessage().lastIndexOf("'")).contains("@");
