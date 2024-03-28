@@ -1,0 +1,8 @@
+
+—	java:S116"WRename this field "country_code" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(„ÏÄùÿÿÿÿJ$321930a3-5a71-4da2-904c-dc5a897cde46
+—	java:S116"WRename this field "country_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ƒÈ­´ÿÿÿÿÿJ$88061000-a385-436f-a1f6-f37185e5fde2
+‘	java:S116"VRename this field "region_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(åØ›¤J$4b034c1a-5f64-40c4-b320-d54843f2ebae
+”	java:S116"TRename this field "city_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡Ïƒ›ıÿÿÿÿJ$52df2573-7022-48b2-8fc9-1a898a2a7a3c
+“	java:S116"SRename this field "zip_code" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡î¹•ûÿÿÿÿJ$b311909f-99e9-44a1-9b33-1088c93662f2
+	java:S116"TRename this field "time_zone" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ËÈ„âJ$5466e5ec-d545-4801-aab3-d909a7a574d6
+“	java:S116"SRename this field "is_proxy" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÍÑºûÿÿÿÿJ$76c15ce9-c226-424e-98dc-7b8bb90dc516

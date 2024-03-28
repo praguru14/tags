@@ -1,0 +1,27 @@
+
+`	java:S112d"FDefine and throw a dedicated exception instead of using a generic one.(£ËÔ€þÿÿÿÿ
+a	java:S112˜"FDefine and throw a dedicated exception instead of using a generic one.(§¾¸…øÿÿÿÿ
+X
+java:S6813%"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813'"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813)"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813+"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813-"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S6813/"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S68131"BRemove this field injection and use constructor injection instead.(êæÄÞ
+X
+java:S68133"BRemove this field injection and use constructor injection instead.(êæÄÞ
+K
+java:S2201¡"/The return value of "orElseThrow" must be used.(øìŽíÿÿÿÿÿ
+I
+java:S1128"3Remove this unused import 'lombok.extern.java.Log'.(Ë¡±ì
+Z
+java:S1128"DRemove this unused import 'org.springframework.http.HttpStatusCode'.(®å™Õ
+D
+java:S1128".Remove this unused import 'java.util.Objects'.(¼¸õ›

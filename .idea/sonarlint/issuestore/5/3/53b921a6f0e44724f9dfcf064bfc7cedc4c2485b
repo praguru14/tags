@@ -1,0 +1,20 @@
+
+š
+java:S2293'"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ãˆé¥üÿÿÿÿJ$bf8e1d04-fdeb-4d59-9702-27c16c032d60
+š
+java:S2293-"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ãˆé¥üÿÿÿÿJ$d42a4197-a825-4794-babb-5be63637aa12
+¡
+java:S22933"YReplace the type specification in this constructor call with the diamond operator ("<>").(ê¼ëÿÿÿÿÿ8½©üÀç1J$9e616298-d0ff-4053-b2fc-0b3ea9be1978
+g
+java:S1452"&Remove usage of generic wildcard type.(ğ•ä’şÿÿÿÿJ$e51cacee-f779-4d4a-9fdc-39df7bd85fd3
+b
+java:S1452&"&Remove usage of generic wildcard type.(ûíÑÇJ$9b5b61a4-c6f8-461c-a0c3-03c9ab4a6588
+g
+java:S1452,"&Remove usage of generic wildcard type.(±üÔüÿÿÿÿJ$a2df2210-e131-41a1-b520-feed69a29afb
+n
+java:S14522"&Remove usage of generic wildcard type.(ÉÊò¯ÿÿÿÿÿ8è©üÀç1J$2b935d79-a8a1-40cf-9b2c-e2fdb2b08d19
+
+java:S1128
+"FRemove this unused import 'org.springframework.validation.FieldError'.(ÖŒéıÿÿÿÿ8ó©üÀç1J$83bd1ce2-1ad6-4f9d-893b-345328ec8be4
+¡
+java:S1128"YRemove this unused import 'org.springframework.web.bind.MethodArgumentNotValidException'.(Ñîœ¥ÿÿÿÿÿ8ó©üÀç1J$e0f9ec7a-c46f-4173-a5bd-a3840460d400
