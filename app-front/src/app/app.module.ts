@@ -21,6 +21,7 @@ import { GeolocationComponent } from './geolocation/geolocation.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpRequestInterceptor } from './services/interceptor.service';
 import { LoginComponent } from './login/login.component';
+import { VerifyComponent } from './verify/verify.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
     ProfileComponent,
     LoginComponent,
+    VerifyComponent,
 
   ],
   imports: [

@@ -26,6 +26,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Random;
 
 import static java.lang.System.*;
 
@@ -34,6 +35,7 @@ import static java.lang.System.*;
 @Builder
 @RequiredArgsConstructor
 public class LoginService {
+
     @Autowired
     private final LoginRepository loginRepository;
     @Autowired
@@ -51,17 +53,18 @@ public class LoginService {
     @Autowired
     private final EmailUtil emailUtil;
 
+
     public DataMessage addUser(Login loginModel) {
         if (loginModel == null) {
             throw new InvalidDataException("Please provide user details");
         }
         Roles roles = (loginModel.getRoles() == null) ? Roles.USER : Roles.ADMIN;
-        Login loginData =  createLogin(loginModel,roles);
-            loginRepository.save(loginData);
-            User user = createUserFromLoginModel(loginModel);
-            usersRepository.save(user);
-            var jwtToken = jwtService.generateToken(loginData);
-            return new DataMessage(HttpStatus.CREATED, user, "User created successfully", jwtToken);
+        Login loginData = createLogin(loginModel, roles);
+        loginRepository.save(loginData);
+        User user = createUserFromLoginModel(loginModel);
+        usersRepository.save(user);
+        var jwtToken = jwtService.generateToken(loginData);
+        return new DataMessage(HttpStatus.CREATED, user, "User created successfully", jwtToken);
     }
 
     public DataMessage getUser(Login login) {
@@ -70,11 +73,18 @@ public class LoginService {
         return new DataMessage(HttpStatus.CREATED, user, "User already exist", jwtToken);
     }
 
-    public DataMessage authenticate(Login loginModel) {
+    public DataMessage authenticate(Login loginModel) throws MessagingException {
         out.println(loginModel);
+        String otp = otpUtil.generateOtp();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
         var user = loginRepository.findByEmail(loginModel.getEmail()).orElseThrow();
-        if(!user.isVerified()){
+        if (!user.isVerified()) {
+
+            emailUtil.sendOtpEmail(loginModel.getEmail(),otp );
+            out.println(otp);
+            user.setOtp(otp);
+            loginRepository.save(user);
+        out.println(  otp);
             return new DataMessage(HttpStatus.CREATED, "Verify yourself");
         }
         var jwtToken = jwtService.generateToken(user);
@@ -85,32 +95,32 @@ public class LoginService {
         User user = new User();
         user.setEmail(loginModel.getEmail());
         user.setPhone(loginModel.getPhone());
-        user.setFirstName(loginModel.getFirstName());
-        user.setLastName(loginModel.getLastName());
-        user.setBloodGroup(loginModel.getBloodGroup());
+        user.setName(loginModel.getName());
+        user.setBloodGroup("N/A");
         return user;
     }
 
     private Login createLogin(Login loginModel, Roles role) {
-        String otp = otpUtil.generateOtp();
-        out.println(otp);
-        try{
-            emailUtil.sendOtpEmail(loginModel.getEmail(), otp);
+//        String otp = otpUtil.generateOtp();
+//        out.println(otp);
+        try {
+            emailUtil.sendOtpEmail(loginModel.getEmail(), otpUtil.generateOtp());
+
         } catch (MessagingException e) {
             throw new RuntimeException("Unable to send OTP at the moment");
         }
         Login data;
         data = Login.builder()
-                .firstName(loginModel.getFirstName())
-                .lastName(loginModel.getLastName())
+                .Name(loginModel.getName())
                 .phone(loginModel.getPhone())
                 .email(loginModel.getEmail())
                 .password(passwordEncoder.encode(loginModel.getPassword()))
                 .roles(role)
-                .bloodGroup(loginModel.getBloodGroup())
-                .otp(otp)
+                .bloodGroup("N/A")
+                .otp(otpUtil.generateOtp())
                 .otpGeneratedTime(LocalDateTime.now())
                 .build();
+        out.println(otpUtil.generateOtp());
         return data;
 
     }
@@ -126,18 +136,18 @@ public class LoginService {
 
 
     public String verifyAccount(String email, String otp) {
-        Login userByEmail = loginRepository.findByEmail(email).orElseThrow(()->new RuntimeException("User not found : "+email));
-            if(userByEmail.getOtp().equals(otp) && Duration.between(userByEmail.getOtpGeneratedTime(),LocalDateTime.now()).getSeconds()<(10*60)){
-                userByEmail.setVerified(true);
-                loginRepository.save(userByEmail);
-                if(userByEmail.isVerified()){
-                  User user = usersRepository.findByEmail(email);
-                    user.setIsVerified(true);
-                 usersRepository.save(user);
+        Login userByEmail = loginRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found : " + email));
+        if (userByEmail.getOtp().equals(otp) && Duration.between(userByEmail.getOtpGeneratedTime(), LocalDateTime.now()).getSeconds() < (10 * 60 * 10)) {
+            userByEmail.setVerified(true);
+            loginRepository.save(userByEmail);
+            if (userByEmail.isVerified()) {
+                User user = usersRepository.findByEmail(email);
+                user.setIsVerified(true);
+                usersRepository.save(user);
 
-                }
-                return "OTP verified";
             }
+            return "OTP verified";
+        }
         return "Please regenerate OTP";
     }
 
@@ -158,18 +168,17 @@ public class LoginService {
     }
 
     public String forgotPassword(String email) throws MessagingException {
-        loginRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found: "+email));
-       emailUtil.resetPassword(email);
-       return "Email sent, Kindly check your email";
+        loginRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found: " + email));
+        emailUtil.resetPassword(email);
+        return "Email sent, Kindly check your email";
     }
 
     public String resetPassword(String email, String newPassword) {
-        Login user = loginRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found: "+email));
+        Login user = loginRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found: " + email));
         user.setPassword(passwordEncoder.encode(newPassword));
         loginRepository.save(user);
         return "New password set";
     }
-
 
 
 }

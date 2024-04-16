@@ -44,16 +44,12 @@ public class User {
 
     @NotBlank
     @Size(max = 50)
-    private String firstName;
+    private String name;
 
     @NotBlank
-    @Size(max = 50)
-    private String lastName;
-
-    @NotBlank
-    @Size(max = 3)
-    @Pattern(regexp = "^(A\\+|A\\-|B\\+|B\\-|O\\+|O\\-|AB\\+|AB\\-)$", message = "Invalid blood group")
+    @Pattern(regexp = "^(A\\+|A\\-|B\\+|B\\-|O\\+|O\\-|AB\\+|AB\\-|N/A)$", message = "Invalid blood group")
     private String bloodGroup;
+
 
     private Date dob;
     

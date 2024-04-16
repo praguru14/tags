@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { GenericApiService } from '../services/generic-api.service';
 import { User } from '../model/user.model';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../services/AuthService.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +24,7 @@ export class ProfileComponent {
   userObj: User = new User;
   userObj1!: any;
 
-  constructor(private genericApiService: GenericApiService, private formBuilder: FormBuilder){}
+  constructor(private genericApiService: GenericApiService, private formBuilder: FormBuilder, private authService: AuthService, private http: HttpClient, private router: Router){}
 
   ngOnInit(){
     this.fetchUserDetails(1);
@@ -58,7 +61,10 @@ export class ProfileComponent {
   get email() {
     return this.userForm.get('email');
   }
-
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/login'])
+  }
   onSubmit(){
     this.userObj.firstName = this.userForm.value.firstName!;
     this.userObj.middleName = this.userForm.value.middleName!;

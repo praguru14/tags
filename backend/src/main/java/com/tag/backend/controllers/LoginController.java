@@ -53,7 +53,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DataMessage> authenticate(@RequestBody Login loginModel) {
+    public ResponseEntity<DataMessage> authenticate(@RequestBody Login loginModel) throws MessagingException {
         return ResponseEntity.ok(loginService.authenticate(loginModel));
     }
 

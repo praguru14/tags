@@ -38,20 +38,17 @@ public class Login implements UserDetails {
 
     @NotBlank
     @Size(max = 50)
-    private String firstName;
+    private String Name;
 
-    @NotBlank
-    @Size(max = 50)
-    private String lastName;
 
     @NotBlank
     @Size(max = 200)
     private String password;
 
     @NotBlank
-    @Size(max = 3)
-    @Pattern(regexp = "^(A\\+|A\\-|B\\+|B\\-|O\\+|O\\-|AB\\+|AB\\-)$", message = "Invalid blood group")
+    @Pattern(regexp = "^(A\\+|A\\-|B\\+|B\\-|O\\+|O\\-|AB\\+|AB\\-|N/A)$", message = "Invalid blood group")
     private String bloodGroup;
+
 
     @Enumerated(EnumType.STRING)
     private Roles roles;
@@ -70,12 +67,11 @@ public class Login implements UserDetails {
         isVerified = verified;
     }
 
-    public Login(Long id, String email, String phone, String firstName, String lastName, String password, String bloodGroup, Roles roles, String otp, LocalDateTime otpGeneratedTime, boolean isVerified) {
+    public Login(Long id, String email, String phone, String Name, String password, String bloodGroup, Roles roles, String otp, LocalDateTime otpGeneratedTime, boolean isVerified) {
         this.id = id;
         this.email = email;
         this.phone = phone;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.Name=Name;
         this.password = password;
         this.bloodGroup = bloodGroup;
         this.roles = roles;
@@ -92,8 +88,7 @@ public class Login implements UserDetails {
         private Long id;
         private String email;
         private String phone;
-        private String firstName;
-        private String lastName;
+        private String Name;
         private String password;
         private String bloodGroup;
         private Roles roles;
@@ -117,15 +112,11 @@ public class Login implements UserDetails {
             return this;
         }
 
-        public Builder firstName(String firstName) {
-            this.firstName = firstName;
+        public Builder Name(String Name) {
+            this.Name = Name;
             return this;
         }
 
-        public Builder lastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
 
         public Builder password(String password) {
             this.password = password;
@@ -160,7 +151,7 @@ public class Login implements UserDetails {
         }
 
         public Login build() {
-            return new Login(id, email, phone, firstName, lastName, password, bloodGroup, roles, otp, otpGeneratedTime,isVerified);
+            return new Login(id, email, phone, Name, password, bloodGroup, roles, otp, otpGeneratedTime,isVerified);
         }
     }
 

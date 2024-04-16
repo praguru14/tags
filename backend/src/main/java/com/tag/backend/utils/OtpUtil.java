@@ -8,7 +8,7 @@ import java.util.Random;
 public class OtpUtil {
 
     public String generateOtp() {
-        Random random = new     Random();
+        Random random = new Random();
         int randomNumber = random.nextInt(999999);
         String output = String.valueOf(randomNumber);
         while (output.length() < 6) {
@@ -16,4 +16,6 @@ public class OtpUtil {
         }
         return output;
     }
+
+    String otp = generateOtp();
 }

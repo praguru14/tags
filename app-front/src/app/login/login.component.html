@@ -6,12 +6,10 @@
         <div class="signup">
             <form>
                 <label for="chk" aria-hidden="true">Sign up</label>
-                <input type="text" name="txt" placeholder="First Name" required="" [(ngModel)]="signupObj.firstName">
-                <input type="text" name="txt" placeholder="Last Name" required="" [(ngModel)]="signupObj.lastName">
+                <input type="text" name="txt" placeholder="Name" required="" [(ngModel)]="signupObj.name">
                 <input type="email" name="email" placeholder="Email" required="" [(ngModel)]="signupObj.email">
                 <input type="password" name="pswd" placeholder="Password" required="" [(ngModel)]="signupObj.password">
                 <input type="text" name="phone" placeholder="Mobile number" required="" [(ngModel)]="signupObj.phone">
-                <input type="text" name="bg" placeholder="Blood Group" required=""  [(ngModel)]="signupObj.bloodGroup">
                 <button (click)="onSignUp()">Sign up</button>
             </form>
         </div>
@@ -22,7 +20,6 @@
                 <input type="email" name="email" placeholder="Email" required="" [(ngModel)]="loginObj.email">
                 <input type="password" name="pswd" placeholder="Password" required="" [(ngModel)]="loginObj.password">
                 <button (click)="onLogin()">Login</button>
-                <button (click)="getToken()">Token</button>
             </form>
         </div>
     </div>

@@ -6,11 +6,13 @@ import { LoginComponent } from './login/login.component';
 import { BaseUrl } from './model/baseUrl.model';
 import { HttpClient } from '@angular/common/http';
 import { AuthGuard } from './authguard/auth.guard';
+import { VerifyComponent } from './verify/verify.component';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'verify', component: VerifyComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
