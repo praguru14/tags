@@ -42,4 +42,9 @@ public class GenericController {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(new DataMessage(HttpStatus.OK, users, (long) users.size()));
     }
+
+    @GetMapping(value = "/user-exists-email", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<DataMessage> getUserFromEmail(@RequestParam String email){
+        return new ResponseEntity<DataMessage>(new DataMessage(HttpStatus.OK, userService.fetchByEmail(email)), HttpStatus.OK);
+    }
 }

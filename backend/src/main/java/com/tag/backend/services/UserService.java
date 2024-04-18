@@ -50,4 +50,13 @@ public class UserService {
         return usersRepository.findAll();
     }
 
+    public Boolean fetchByEmail(String email) {
+        User user = usersRepository.findByEmail(email);
+        if (user == null) {
+            return false;
+        } else {
+            String userEmail = user.getEmail();
+            return userEmail.equals(email);
+        }
+    }
 }

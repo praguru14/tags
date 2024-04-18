@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { BaseUrl } from '../model/baseUrl.model';
 import { Router } from '@angular/router';
@@ -13,7 +13,8 @@ import { DataService } from '../services/DataService.service';
 export class LoginComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService, private dataService: DataService) { }
-
+  errorMessage: string = '';
+  emailExistsBool:Boolean = false
   url = `${BaseUrl.register}`
   accessToken: string='';
   response =''
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   email = ''
+  emailCheck:any=''
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
   }
@@ -53,6 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+    
     this.http.post<any>(this.url + 'login', this.loginObj).subscribe(
       (response) => {
         console.log("logged in" + this.url, response);
@@ -73,12 +76,33 @@ export class LoginComponent implements OnInit {
         }
       },
       (error) => {
-        console.error(this.signupObj, error);
+        console.error(this.loginObj, error);
+        this.errorMessage = "Wrong details , please try again"        
       }
     );
   }
 
+  getErrorMessage(emailCheck: string) {
+    const url = `${BaseUrl.baseUrl}user-exists-email`;
+    console.log(url);
+    const queryParams = { email: emailCheck };
 
+    this.http.get<any>(url, { params: queryParams }).subscribe(
+      (response) => {
+        console.log(response);
+        if(response.data){
+          this.emailExistsBool= true;
+          console.log(this.emailExistsBool);
+          
+        }
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+  
+    );
+    return this.emailExistsBool;
+  }
 
   storeToken(token: string) {
     localStorage.setItem('accessToken', token);

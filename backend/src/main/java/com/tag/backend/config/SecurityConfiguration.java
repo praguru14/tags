@@ -43,7 +43,8 @@ public class SecurityConfiguration {
                                         "/reset-password",
                                         "/error",
                                         "/swagger",
-                                        "/swagger-ui/index.html"
+                                        "/swagger-ui/index.html",
+                                        "/tag/user-exists-email"
                                 ).permitAll()
                                 .requestMatchers("/tag/get-all-users")
                                 .authenticated())

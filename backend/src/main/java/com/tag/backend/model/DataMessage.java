@@ -29,6 +29,12 @@ public class DataMessage implements Serializable {
         this.message = message;
         this.accessToken = accessToken;
     }
+    public DataMessage(HttpStatus status, Object data, String message) {
+        this.status = status;
+        this.data = data;
+        this.message = message;
+
+    }
 
     public DataMessage(HttpStatus status, String message) {
         super();

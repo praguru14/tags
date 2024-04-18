@@ -99,3 +99,11 @@ button:hover {
 #chk:checked~.signup label {
     transform: scale(.6);
 }
+
+
+.error-message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+color: #ee1717;
+}

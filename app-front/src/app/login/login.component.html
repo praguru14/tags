@@ -1,13 +1,18 @@
-
 <body>
     <div class="main">
         <input type="checkbox" id="chk" aria-hidden="true">
-
         <div class="signup">
             <form>
                 <label for="chk" aria-hidden="true">Sign up</label>
                 <input type="text" name="txt" placeholder="Name" required="" [(ngModel)]="signupObj.name">
-                <input type="email" name="email" placeholder="Email" required="" [(ngModel)]="signupObj.email">
+                <!-- <input type="email" name="email" placeholder="Email" required="" [(ngModel)]="signupObj.email"
+                    #emailField="ngModel">
+            <div *ngIf="emailField?.invalid && (emailField?.dirty || emailField?.touched)" class="error-message">
+                <div *ngIf="emailField?.errors?.['required']">Email is required.</div>
+                <div *ngIf="emailField?.errors?.['email']">Invalid email address.</div>
+            </div> -->
+            <input type="text" name="email" placeholder="Email" pattern="/^[a-zA-Z0-9.!#$%&`*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required [(ngModel)]="signupObj.email">
+
                 <input type="password" name="pswd" placeholder="Password" required="" [(ngModel)]="signupObj.password">
                 <input type="text" name="phone" placeholder="Mobile number" required="" [(ngModel)]="signupObj.phone">
                 <button (click)="onSignUp()">Sign up</button>
@@ -20,8 +25,11 @@
                 <input type="email" name="email" placeholder="Email" required="" [(ngModel)]="loginObj.email">
                 <input type="password" name="pswd" placeholder="Password" required="" [(ngModel)]="loginObj.password">
                 <button (click)="onLogin()">Login</button>
+                <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
             </form>
         </div>
     </div>
 </body>
-
+<!-- <input
+    pattern='^(([^>()[\]\\.,;:\s@"]+(\.[^>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+    required type="text" id="Email"> -->
