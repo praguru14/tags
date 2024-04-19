@@ -46,7 +46,7 @@ public class SecurityConfiguration {
                                         "/swagger-ui/index.html",
                                         "/tag/user-exists-email"
                                 ).permitAll()
-                                .requestMatchers("/tag/get-all-users")
+                                .requestMatchers("/tag/get-all-users","/tag/fetch-user-by-id","/tag/add-user")
                                 .authenticated())
                 .sessionManagement(s ->
                         s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

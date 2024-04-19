@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   emailExistsBool:Boolean = false
   url = `${BaseUrl.register}`
   accessToken: string='';
+  getUserId:string=''
   response =''
   signupObj:any={
     name:'',
@@ -38,6 +39,9 @@ export class LoginComponent implements OnInit {
     this.http.post(this.url + 'register', this.signupObj).subscribe(
       (response: any) => {
         console.log(response);
+        this.getUserId= response.data.id;
+        localStorage.setItem('id', this.getUserId);
+        
         this.dataService.getEmail(this.signupObj.email)
         this.response = response;
         const accessToken = response?.accessToken; // Access accessToken property
@@ -59,6 +63,9 @@ export class LoginComponent implements OnInit {
     this.http.post<any>(this.url + 'login', this.loginObj).subscribe(
       (response) => {
         console.log("logged in" + this.url, response);
+      
+        this.getUserId = response.data[0].id;
+        localStorage.setItem('id', this.getUserId);
         this.response = response;
         const accessToken = response.accessToken;
         this.storeToken(accessToken);
@@ -116,5 +123,7 @@ export class LoginComponent implements OnInit {
   onLogout(){
     this.authService.logout();
   }
+ 
+
 
 }

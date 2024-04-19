@@ -13,10 +13,8 @@ import jakarta.mail.MessagingException;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,9 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 import static java.lang.System.*;
 
@@ -77,18 +73,23 @@ public class LoginService {
         out.println(loginModel);
         String otp = otpUtil.generateOtp();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
-        var user = loginRepository.findByEmail(loginModel.getEmail()).orElseThrow();
+        Login user = loginRepository.findByEmail(loginModel.getEmail()).orElseThrow();
         if (!user.isVerified()) {
 
             emailUtil.sendOtpEmail(loginModel.getEmail(),otp );
             out.println(otp);
             user.setOtp(otp);
             loginRepository.save(user);
-        out.println(  otp);
+        out.println(otp);
             return new DataMessage(HttpStatus.CREATED, "Verify yourself");
         }
         var jwtToken = jwtService.generateToken(user);
-        return new DataMessage(HttpStatus.CREATED, user, "User auth successfully", jwtToken);
+        out.println(jwtToken + "jwt");
+        User u = usersRepository.findByEmail(user.getEmail());
+        List<Object> combinedList = new ArrayList<>();
+        combinedList.add(u);
+        combinedList.add(user);
+        return new DataMessage(HttpStatus.CREATED, combinedList, "User auth successfully", jwtToken);
     }
 
     private User createUserFromLoginModel(Login loginModel) {

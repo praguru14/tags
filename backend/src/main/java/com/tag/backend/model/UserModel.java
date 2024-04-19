@@ -17,9 +17,7 @@ public class UserModel {
 
     private String phone;
 
-    private String firstName;
-
-    private String lastName;
+    private String name;
 
     private String bloodGroup;
 

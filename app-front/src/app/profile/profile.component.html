@@ -1,59 +1,63 @@
 <div class="container profile">
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <div class="row">
-            <img class="square" src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png" alt="">
+            <img class="square"
+                src="https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+                alt="">
         </div>
         <div class="row">
-            <h2 class="center-text">{{userObj.firstName}} {{userObj.lastName}}</h2>
+            <h2 class="center-text">{{ userObj.name }}</h2>
         </div>
         <div class="row">
-            <p class="center-text">27 Years and 15 days old</p>
+            <p class="center-text">{{ getAge() }}</p>
         </div>
         <div class="row">
             <div class="card">
                 <div class="card-header">
-                  Personal Information
+                    Personal Information
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <label class="label-text">First Name: </label>
-                            <input class="input-text" formControlName="firstName" >
+                            <label class="label-text">First Name:</label>
+                            <input class="input-text" formControlName="firstName">
                         </div>
                         <div class="col-md-4">
-                            <label class="label-text">Middle Name: </label>
-                            <input class="input-text" formControlName="middleName" >
+                            <label class="label-text">Last Name:</label>
+                            <input class="input-text" formControlName="lastName">
                         </div>
                         <div class="col-md-4">
-                            <label class="label-text">Last Name: </label>
-                            <input class="input-text" formControlName="lastName" >
+                            <label class="label-text">DOB:</label>
+                            <input type="date" name="begin" placeholder="yyyy-mm-dd"
+                                [value]="userForm.controls.dob.value" min="1947-01-01" max="2030-12-31"
+                                class="input-text" formControlName="dob">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <label class="label-text">Phone: </label>
-                            <input class="input-text" formControlName="phone" >
+                            <label class="label-text">Phone:</label>
+                            <input class="input-text" formControlName="phone">
                         </div>
                         <div class="col-md-4">
-                            <label class="label-text">Email: </label>
-                            <input class="input-text" formControlName="email" >
+                            <label class="label-text">Email:</label>
+                            <input class="input-text" formControlName="email">
                             <p *ngIf="email?.invalid && (email?.dirty || email?.touched)">
                                 Please provide a valid email address.
                             </p>
                         </div>
                         <div class="col-md-4">
-                            <label class="label-text">Blood Group: </label>
-                            <input class="input-text" formControlName="bloodGroup" >
+                            <label class="label-text">Blood Group:</label>
+                            <input class="input-text" formControlName="bloodGroup">
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
         </div>
         <div class="row">
             <button type="submit" [disabled]="userForm.invalid">Submit</button>
         </div>
-    </form>  
-<div>
-    <button type="submit" (click)="onLogout()">Logout</button>
-</div>         
+    </form>
+    <div>
+        <button type="submit" (click)="onLogout()">Logout</button>
+    </div>
 </div>

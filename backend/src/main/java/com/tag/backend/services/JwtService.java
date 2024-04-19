@@ -20,7 +20,7 @@ public class JwtService {
     
     private static final String SECRET_KEY ="404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
 
-    private static final long EXPIRATION_TIME = System.currentTimeMillis() + 1000*3600;
+    private static final long EXPIRATION_TIME = System.currentTimeMillis() + 1000*36000;
     public String extractUserName(String jwtToken) {
         return  extractClaims(jwtToken,Claims::getSubject);
     }
