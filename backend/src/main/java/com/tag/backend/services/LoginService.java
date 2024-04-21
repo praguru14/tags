@@ -146,7 +146,6 @@ public class LoginService {
                 User user = usersRepository.findByEmail(email);
                 user.setIsVerified(true);
                 usersRepository.save(user);
-
             }
             return "OTP verified";
         }
