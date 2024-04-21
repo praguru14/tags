@@ -74,21 +74,22 @@ public class LoginService {
         String otp = otpUtil.generateOtp();
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword()));
         Login user = loginRepository.findByEmail(loginModel.getEmail()).orElseThrow();
-        if (!user.isVerified()) {
-
-            emailUtil.sendOtpEmail(loginModel.getEmail(),otp );
-            out.println(otp);
-            user.setOtp(otp);
-            loginRepository.save(user);
-        out.println(otp);
-            return new DataMessage(HttpStatus.CREATED, "Verify yourself");
-        }
         var jwtToken = jwtService.generateToken(user);
         out.println(jwtToken + "jwt");
         User u = usersRepository.findByEmail(user.getEmail());
         List<Object> combinedList = new ArrayList<>();
         combinedList.add(u);
         combinedList.add(user);
+        if (!user.isVerified()) {
+
+//            emailUtil.sendOtpEmail(loginModel.getEmail(),otp );
+//            out.println(otp);
+//            user.setOtp(otp);
+//            loginRepository.save(user);
+//        out.println(otp);
+            return new DataMessage(HttpStatus.CREATED, combinedList,"Verify yourself",jwtToken);
+        }
+
         return new DataMessage(HttpStatus.CREATED, combinedList, "User auth successfully", jwtToken);
     }
 

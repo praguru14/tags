@@ -1,7 +1,14 @@
 
 <div>
-    Kindly verify your email : {{email}}
+    Kindly verify your email:
+    <input type="text" placeholder="enter otp" #otpInput>
+    <button type="button" (click)="submitOTP(otpInput.value)">Enter</button>
 </div>
+<div>
+    <button type="button" (click)="sendOTP()">Send OTP</button>
+</div>
+
+
 <div>
     <button type="submit" (click)="onLogout()">Logout</button>
 </div>
