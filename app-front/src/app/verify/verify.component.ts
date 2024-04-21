@@ -9,11 +9,11 @@ import {jwtDecode} from "jwt-decode";
 @Component({
   selector: 'app-verify',
   templateUrl: './verify.component.html',
-  styleUrl: './verify.component.scss'
+  styleUrls: ['./verify.component.scss']
 })
 export class VerifyComponent {
   @Input() email: string = '';
-  jwtTok = localStorage.getItem('accessToken');
+  jwtToken: string | null = localStorage.getItem('accessToken');
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService, private dataService: DataService) { }
 
@@ -27,70 +27,52 @@ export class VerifyComponent {
   }
 
   submitOTP(otpValue: string) {
-    // Retrieve the JWT token from wherever it's stored
-    const jwtToken: string | null = localStorage.getItem('accessToken');
-    console.log(jwtToken + " token");
-    console.log(otpValue);
+    const email = this.getEmailFromToken();
+    if (email) {
+      // Construct the URL with email and OTP as query parameters
+      const url = `${BaseUrl.register}verify-account?email=${email}&otp=${otpValue}`;
 
-    if (jwtToken) {
-      try {
-        const decodedToken: any = jwtDecode(jwtToken);
-        console.log('Decoded Token:', decodedToken);
-        const email: string = decodedToken.sub;
-        console.log('Decoded email:', email);
-
-        let params = new HttpParams();
-        params = params.append('email', email);
-        params = params.append('otp', otpValue);
-
-        // Make the HTTP GET request with query parameters
-        this.http.get(BaseUrl.register + "verify-account", { params: params }).subscribe(
-          (response) => {
-            // Handle successful response
-            console.log('Verification successful:', response);
-          },
-          (error) => {
-            // Handle error response
-            console.error('Verification failed:', error);
-          }
-        );
-      } catch (error) {
-        console.error('Error decoding JWT token:', error);
-      }
-    } else {
-      console.error('JWT token not found in localStorage.');
+      // Make a GET request to the constructed URL
+      this.http.post(url,{},{responseType:'text'}).subscribe(
+        (response) => {
+          console.log('Verification successful:', response);
+          this.router.navigate(['/profile']); // Navigate to profile on successful verification
+        },
+        (error) => {
+          console.error('Verification failed:', error);
+        }
+      );
     }
   }
 
-
   sendOTP() {
-    // Retrieve the JWT token from localStorage
-    const jwtToken: string | null = localStorage.getItem('accessToken');
-
-    // Check if JWT token exists
-    if (jwtToken !== null) {
-      // Decode the JWT token to extract email
-      const decodedToken: any = jwtDecode(jwtToken);
-      console.log('Decoded Token:', decodedToken);
-      const email: string = decodedToken.sub;
-      console.log('Decoded email:', email);
-
-      // Construct the URL with email as a query parameter
+    const email = this.getEmailFromToken();
+    if (email) {
       const url = `${BaseUrl.register}regenerate-otp?email=${email}`;
-
-      // Make a POST request to the constructed URL
-      this.http.post(url, {}).subscribe(
+      this.http.post(url, {},{responseType:'text'}).subscribe(
         (response) => {
           console.log('OTP sent successfully:', response);
+          
         },
         (error) => {
           console.error('Error sending OTP:', error);
         }
       );
-    } else {
-      console.error('JWT token not found in localStorage.');
     }
   }
 
-
+  private getEmailFromToken(): string | null {
+    if (this.jwtToken) {
+      try {
+        const decodedToken: any = jwtDecode(this.jwtToken);
+        return decodedToken.sub;
+      } catch (error) {
+        console.error('Error decoding JWT token:', error);
+        return null;
+      }
+    } else {
+      console.error('JWT token not found in localStorage.');
+      return null;
+    }
+  }
 }
