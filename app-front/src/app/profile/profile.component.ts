@@ -6,6 +6,7 @@ import { GenericApiService } from '../services/generic-api.service';
 import { User } from '../model/user.model';
 import { AuthService } from '../services/AuthService.service';
 import { HttpHeaders } from '@angular/common/http';
+import { Utility } from '../utility/utility';
 
 @Component({
   selector: 'app-profile',
@@ -13,15 +14,23 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  submitted = false; 
+  isReadOnly = true; 
 
   userForm = this.formBuilder.group({
-    firstName: [''],
+    firstName: ['', [Validators.required,Validators.minLength(3)]],
     dob: [''],
-    lastName: [''],
+    lastName: ['', [Validators.required, Validators.minLength(3)]], 
     phone: [0, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
     email: ['', [Validators.required, Validators.email]],
-    bloodGroup: ['']
+    bloodGroup: ['', [Validators.required, Utility.bloodGroupValidator()]]
   });
+// // To enable the email form control
+  // this.userForm.get('email')?.enable(); 
+  // { value: '', disabled: true }
+
+// // To disable the email form control
+// this.userForm.get('email')?.disable();
 
   userObj: User = new User();
   userObj1: any;
@@ -69,9 +78,7 @@ export class ProfileComponent implements OnInit {
     const fullName = this.userObj.name;
     const parts = fullName.split(' ',2);
 
-     this.dobDate = this.userObj.dob ? new Date(this.userObj.dob) : null;
-    
-     
+    this.dobDate = this.userObj.dob ? new Date(this.userObj.dob) : null;     
     const timezoneOffset = this.dobDate ? this.dobDate.getTimezoneOffset() * 60000 : 0;
     const adjustedDob = this.dobDate ? new Date(this.dobDate.getTime() - timezoneOffset) : null;
   
@@ -128,6 +135,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true; 
     const dobValue = this.userForm.value.dob;
     const headers = this.createAuthHeaders();
 

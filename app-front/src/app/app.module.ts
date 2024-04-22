@@ -22,6 +22,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpRequestInterceptor } from './services/interceptor.service';
 import { LoginComponent } from './login/login.component';
 import { VerifyComponent } from './verify/verify.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { VerifyComponent } from './verify/verify.component';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTooltipModule,
   ],
   providers: [
     provideAnimationsAsync(),

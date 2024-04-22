@@ -21,10 +21,16 @@
                         <div class="col-md-4">
                             <label class="label-text">First Name:</label>
                             <input class="input-text" formControlName="firstName">
+                        <p *ngIf="userForm.get('firstName')?.errors?.minlength && userForm.get('firstName')?.touched">
+                            First name must be at least 3 characters long.
+                        </p>
                         </div>
                         <div class="col-md-4">
                             <label class="label-text">Last Name:</label>
                             <input class="input-text" formControlName="lastName">
+                            <p *ngIf="userForm.get('lastName')?.errors?.minlength && userForm.get('lastName')?.touched">
+                                Last name must be at least 3 characters long.
+                            </p>
                         </div>
                         <div class="col-md-4">
                             <label class="label-text">DOB:</label>
@@ -38,17 +44,35 @@
                             <label class="label-text">Phone:</label>
                             <input class="input-text" formControlName="phone">
                         </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Email:</label>
-                            <input class="input-text" formControlName="email">
-                            <p *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-                                Please provide a valid email address.
-                            </p>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="label-text">Blood Group:</label>
-                            <input class="input-text" formControlName="bloodGroup">
-                        </div>
+                <div class="col-md-4">
+                    <label class="label-text">Email:</label>
+                    <input class="input-text" formControlName="email" [disabled]="true" matTooltip="Kindly contact admin to change your email" ng-readonly="all">
+                    <p *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                        Please provide a valid email address.
+                    </p>
+                </div>
+
+
+                    <div class="col-md-4" [class.scroll-bar]="submitted && userForm.get('bloodGroup')?.invalid">
+                        <label class="label-text">Blood Group:</label>
+                        <select class="input-text" formControlName="bloodGroup">
+                            <option value="">Select Blood Group</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="N/A">N/A</option>
+                        </select>
+                        <p *ngIf="submitted && userForm.get('bloodGroup')?.invalid">
+                            Please choose a valid blood group.
+                        </p>
+                    </div>
+
+
                     </div>
                 </div>
             </div>
@@ -60,4 +84,3 @@
     <div>
         <button type="submit" (click)="onLogout()">Logout</button>
     </div>
-</div>
