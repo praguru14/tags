@@ -61,7 +61,7 @@ export class VerifyComponent {
     }
   }
 
-  private getEmailFromToken(): string | null {
+   getEmailFromToken(): string | null {
     if (this.jwtToken) {
       try {
         const decodedToken: any = jwtDecode(this.jwtToken);
