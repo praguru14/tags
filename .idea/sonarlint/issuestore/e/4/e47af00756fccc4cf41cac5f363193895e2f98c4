@@ -1,2 +1,7 @@
 
-}	java:S107I"BConstructor has 11 parameters, which is greater than 7 authorized.(ÍÅä§J$5403d4e0-b339-412f-ad25-004ee4d10454
+m	java:S117F"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ¤Ç8åÏÓ¿ğ1
+m	java:S117s"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ğ©š8æÏÓ¿ğ1
+p	java:S116)"ORename this field "Name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(É¬­Áøÿÿÿÿ8öÏÓ¿ğ1
+^	java:S107F"BConstructor has 10 parameters, which is greater than 7 authorized.(œ¤Ç8úÏÓ¿ğ1
+p	java:S116["ORename this field "Name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(É¬­Áøÿÿÿÿ8ƒĞÓ¿ğ1
+j	java:S100s"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ğ©š8ˆĞÓ¿ğ1

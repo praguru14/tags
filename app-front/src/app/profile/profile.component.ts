@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { GenericApiService } from '../services/generic-api.service';
 import { User } from '../model/user.model';
 import { AuthService } from '../services/AuthService.service';
 import { HttpHeaders } from '@angular/common/http';
 import { Utility } from '../utility/utility';
+import { jwtDecode } from "jwt-decode";
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -14,28 +16,31 @@ import { Utility } from '../utility/utility';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  submitted = false; 
-  isReadOnly = true; 
+  jwtToken: string | null = localStorage.getItem('accessToken');
+  submitted = false;
+  isReadOnly = true;
 
   userForm = this.formBuilder.group({
-    firstName: ['', [Validators.required,Validators.minLength(3)]],
+    firstName: ['', [Validators.required, Validators.minLength(3)]],
     dob: [''],
-    lastName: ['', [Validators.required, Validators.minLength(3)]], 
+    lastName: ['', [Validators.required, Validators.minLength(3)]],
     phone: [0, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-    email: ['', [Validators.required, Validators.email]],
+    email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
     bloodGroup: ['', [Validators.required, Utility.bloodGroupValidator()]]
   });
-// // To enable the email form control
+  // // To enable the email form control
   // this.userForm.get('email')?.enable(); 
   // { value: '', disabled: true }
 
-// // To disable the email form control
-// this.userForm.get('email')?.disable();
+  // // To disable the email form control
+  // this.userForm.get('email')?.disable();
 
   userObj: User = new User();
   userObj1: any;
-  dobDate: Date | null = null; 
+  dobDate: Date | null = null;
   id = localStorage.getItem('id');
+
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private genericApiService: GenericApiService,
@@ -44,13 +49,22 @@ export class ProfileComponent implements OnInit {
     private router: Router
   ) { }
 
+
   ngOnInit() {
     this.fetchUserDetails(this.id);
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
       .subscribe(() => {
         this.fetchUserDetails(this.id);
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   fetchUserDetails(id: any) {
@@ -76,12 +90,12 @@ export class ProfileComponent implements OnInit {
 
   private setUserFormData() {
     const fullName = this.userObj.name;
-    const parts = fullName.split(' ',2);
+    const parts = fullName.split(' ', 2);
 
-    this.dobDate = this.userObj.dob ? new Date(this.userObj.dob) : null;     
+    this.dobDate = this.userObj.dob ? new Date(this.userObj.dob) : null;
     const timezoneOffset = this.dobDate ? this.dobDate.getTimezoneOffset() * 60000 : 0;
     const adjustedDob = this.dobDate ? new Date(this.dobDate.getTime() - timezoneOffset) : null;
-  
+
 
     const formValue: any = {
       firstName: parts[0],
@@ -92,7 +106,7 @@ export class ProfileComponent implements OnInit {
       dob: adjustedDob ? adjustedDob.toISOString().substring(0, 10) : null
     };
     this.userForm.setValue(formValue);
-    
+
   }
   getAge(): string {
     if (!this.userObj || !this.userObj.dob) {
@@ -131,11 +145,11 @@ export class ProfileComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+  
   }
 
   onSubmit() {
-    this.submitted = true; 
+    this.submitted = true;
     const dobValue = this.userForm.value.dob;
     const headers = this.createAuthHeaders();
 
@@ -146,7 +160,7 @@ export class ProfileComponent implements OnInit {
 
 
     this.userObj.phone = this.userForm.value.phone!;
-    this.userObj.email = this.userForm.value.email!;
+    this.userObj.email = this.getEmailFromToken() || '';
     this.userObj.bloodGroup = this.userForm.value.bloodGroup!;
     this.userObj.dob = dobValue ? new Date(dobValue) : undefined;
 
@@ -165,7 +179,7 @@ export class ProfileComponent implements OnInit {
   createAuthHeaders(): HttpHeaders {
     const accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
-    
+
 
     if (!accessToken) {
       console.error('Access token not found in localStorage');
@@ -176,5 +190,21 @@ export class ProfileComponent implements OnInit {
       'Authorization': `Bearer ${accessToken}`
     });
   }
+  private getEmailFromToken(): string | null {
+    if (this.jwtToken) {
+      try {
+        const decodedToken: any = jwtDecode(this.jwtToken);
+        return decodedToken.sub;
+      } catch (error) {
+        console.error('Error decoding JWT token:', error);
+        return null;
+      }
+    } else {
+      console.error('JWT token not found in localStorage.');
+      return null;
+    }
+  }
 
 }
+
+

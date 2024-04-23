@@ -54,7 +54,12 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(l -> l.logoutUrl("/logout")
                         .addLogoutHandler(logoutHandler)
-                        .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext()));
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            {
+                                SecurityContextHolder.clearContext();
+                                response.sendRedirect("/");
+                            }
+                        }));
 
 
 

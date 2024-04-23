@@ -3,6 +3,8 @@
 	java:S112#"FDefine and throw a dedicated exception instead of using a generic one.(áÏÇãJ$81f0203f-f188-4589-a6fb-19864a05bf78
 u
 java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ó§ò38®€Áç1
+v
+java:S22930"YReplace the type specification in this constructor call with the diamond operator ("<>").(³Ä¸Ó8ÂŒÚÉğ1
 ~
 java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$92a88df9-164f-49b0-8967-d6384f1f811b
 §

@@ -1,12 +1,16 @@
 
 ~
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$91aee986-ba81-4dd2-851e-17f0b030ed0c
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$20d2d894-c060-4acf-bc08-5aa7d3322840
 ~
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$a75286ce-8b27-4221-bb51-120561ed7937
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$c411dc28-7bbc-4f1d-9179-e8c08dc5f25f
 ~
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$f1073284-1bfe-4566-bf70-dffe78beaa95
-	java:S100!"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ëğ³‘8¾öŒšè1J$1b7214fc-598c-4c7e-98f0-7f1f2487a599
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞJ$20ca6c1c-a133-4d41-b039-3dd8e5eeb162
+	java:S100#"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ëğ³‘8¾öŒšè1J$d1c613b0-0cee-4048-842a-4c5ddf59e656
 ¹
-java:S1130L"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(£¢‹ÕûÿÿÿÿJ$1e576e95-c218-48c1-854a-004285898de5
+java:S1130N"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(£¢‹ÕûÿÿÿÿJ$0c454d16-035a-4920-85f3-d9db30549f50
 x
-java:S1128"<Remove this unused import 'com.tag.backend.model.UserModel'.(¦è¤×J$11702caf-05d9-4b74-9879-b024bf933d18
+java:S1128"<Remove this unused import 'com.tag.backend.model.UserModel'.(¦è¤×J$07e56f60-8017-465b-98b5-d77a506f76a9
+p
+java:S1128".Remove this unused import 'java.util.HashSet'.(Ê‚êX8°¹ÚÉğ1J$5cd78875-eaf2-4e0a-ac9d-ba0f389d2599
+r
+java:S1128"*Remove this unused import 'java.util.Set'.(ö²„¤şÿÿÿÿ8°¹ÚÉğ1J$b67e3e5a-9ca3-4f6c-93ac-69e943ea3d86

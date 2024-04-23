@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoadingService } from '../services/loading.service';
 import { delay } from 'rxjs';
+import { Utility } from '../utility/utility';
 
 @Component({
   selector: 'app-homepage',
@@ -8,10 +9,12 @@ import { delay } from 'rxjs';
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent {
+  isLoggedIn = true;
   loading: boolean = false;
+  email = Utility.getEmailFromToken();
   constructor(
     private _loading: LoadingService
-  ){ }
+  ){}
 
   ngOnInit() {
     this.listenToLoading();
@@ -28,5 +31,6 @@ export class HomepageComponent {
         this.loading = loading;
       });
   }
+
 
 }
