@@ -1,8 +1,10 @@
 package com.tag.backend.services;
 
+import com.tag.backend.entity.Login;
 import com.tag.backend.entity.User;
 import com.tag.backend.exceptionhandling.InvalidDataException;
 import com.tag.backend.model.UserModel;
+import com.tag.backend.repository.LoginRepository;
 import com.tag.backend.repository.UsersRepository;
 
 import org.slf4j.Logger;
@@ -20,6 +22,9 @@ public class UserService {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private LoginRepository loginRepository;
 
     public UserModel fetchUserById(long userId) {
         Optional<User> fleetOptional = usersRepository.findById(userId);
@@ -58,5 +63,13 @@ public class UserService {
             String userEmail = user.getEmail();
             return userEmail.equals(email);
         }
+    }
+
+    public String editEmail(String oldEmail,String newEmail) {
+        User user = usersRepository.findByEmail(oldEmail);
+        Login login = loginRepository.findByEmail(oldEmail).orElseThrow();
+        user.setEmail(newEmail);
+        login.setEmail(newEmail);
+        return "Updated email from" + oldEmail + " to "+ newEmail;
     }
 }

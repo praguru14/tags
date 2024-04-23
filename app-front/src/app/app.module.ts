@@ -23,6 +23,8 @@ import { HttpRequestInterceptor } from './services/interceptor.service';
 import { LoginComponent } from './login/login.component';
 import { VerifyComponent } from './verify/verify.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ReactiveFormsModule,
     HttpClientModule,
     MatTooltipModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     provideAnimationsAsync(),

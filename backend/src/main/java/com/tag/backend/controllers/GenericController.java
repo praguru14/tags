@@ -47,4 +47,8 @@ public class GenericController {
     public ResponseEntity<DataMessage> getUserFromEmail(@RequestParam String email){
         return new ResponseEntity<DataMessage>(new DataMessage(HttpStatus.OK, userService.fetchByEmail(email)), HttpStatus.OK);
     }
+    @PostMapping("/edit-email")
+    public ResponseEntity<DataMessage> editEmail(@RequestBody String oldEmail,String newEmail){
+        return new ResponseEntity<>(new DataMessage(HttpStatus.OK, userService.editEmail(oldEmail, newEmail)), HttpStatus.OK);
+    }
 }

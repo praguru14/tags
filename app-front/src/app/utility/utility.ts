@@ -3,6 +3,14 @@ import { jwtDecode } from "jwt-decode";
 
 export class Utility {
   static isLoggedIn = false;
+  static dobFormatValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const dobPattern = /^\d{4}-\d{2}-\d{2}$/;
+    const valid = dobPattern.test(control.value);
+    return valid ? null : { 'invalidDobFormat': { value: control.value } };
+  };
+  }
+
 
   static bloodGroupValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
