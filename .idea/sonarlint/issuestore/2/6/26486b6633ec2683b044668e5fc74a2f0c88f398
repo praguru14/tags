@@ -1,7 +1,19 @@
 
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8ª’ÎÖð1J$8066c980-04d4-45af-b7f0-f2ac1c7370c7
+java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄÞ8ª’ÎÖð1J$76ff3ae4-8c7a-4cfb-91cf-cd0373741766
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8«’ÎÖð1J$a97bfed0-f68a-4e17-87dc-327fa08ae1c6
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄÞ8«’ÎÖð1J$e1bed197-bcda-4513-97ac-5727bba3176a
+‰
+java:S1128"ARemove this unused import 'org.springframework.http.HttpHeaders'.(ãŸñ×úÿÿÿÿ8ÓÖ¹–ö1J$33afe5ae-a01b-49dd-800a-f4eceb0389dc
+ˆ
+java:S1128"@Remove this unused import 'org.springframework.http.HttpStatus'.(íŸ¤Šúÿÿÿÿ8ÓÖ¹–ö1J$4ab4fd2c-e80c-485e-971f-dbac9600a0ce
+‡
+java:S1128"?Remove this unused import 'org.springframework.http.MediaType'.(úŸÝ¯þÿÿÿÿ8ÓÖ¹–ö1J$b8d89fb6-2616-4e51-b427-e9324503b179
+Œ
+java:S1128"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8ÓÖ¹–ö1J$5c1c0fce-b6d3-4f57-beba-087b1ded2894
+’
+java:S1128"ORemove this unused import 'org.springframework.web.bind.annotation.GetMapping'.(‡¡‰Ø8ÓÖ¹–ö1J$4f6c252c-101e-46fd-b0a4-e768018f3597
+™
+java:S1128"QRemove this unused import 'org.springframework.web.bind.annotation.PathVariable'.(¹ûñÅþÿÿÿÿ8ÓÖ¹–ö1J$d595b3df-c0c0-40d2-b193-99061eb3172d
 r
-java:S1068"*Remove this unused "logger" private field.(“‡Þ¼ùÿÿÿÿ8¹’ÎÖð1J$b36af36a-1ae7-4876-9049-d347cd847b0b
+java:S1068"*Remove this unused "logger" private field.(“‡Þ¼ùÿÿÿÿ8¹’ÎÖð1J$5c8a2674-6624-4f19-8b01-2edb66f1c1d6

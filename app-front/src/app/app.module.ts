@@ -25,6 +25,7 @@ import { VerifyComponent } from './verify/verify.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MatSelectModule } from "@angular/material/select";
     ProfileComponent,
     LoginComponent,
     VerifyComponent,
+    ImageUploadComponent,
 
   ],
   imports: [

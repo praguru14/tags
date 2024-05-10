@@ -12490,3 +12490,11 @@ Q.idea/sonarlint/securityhotspotstore/c/4/c416f7e46de3733facb7ce2547907f1ce300ed
 Q.idea/sonarlint/securityhotspotstore/c/9/c9e02322086f3750a37bb9b6c5617f42e3ff02f3,9\a\9ae47044f555fb17c98808f62099a143f13ab659
 g
 7app-front/src/app/homepage/footer/footer.component.scss,2\a\2a27cd36fba211c198734acedfb2e0497e254815
+v
+Fbackend/src/main/java/com/tag/backend/controllers/ImageController.java,b\d\bd44e2db0f0fa1e88d5d1cc70c98a760063a00e9
+|
+Lbackend/src/main/java/com/tag/backend/controllers/ImageUploadController.java,d\d\dd5c4d78bbb7d3d4e927637d2e2bcfdd4478a94e
+K
+app-front/package-lock.json,b\a\baf99dc6950bd83ac49546aef4c0f9034c0fd792
+F
+app-front/package.json,9\8\98920754259ee4508305a768dfda83c2ab8da3e9
