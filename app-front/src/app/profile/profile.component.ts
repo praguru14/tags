@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
   submitted = false;
   isReadOnly = true;
   public countries:any = countries;
+  idData:any;
   //   countries: ICountryAndCode[] = [
   //   { code: "+91", name: "India" },
   //   { code: "+61", name: "Australia" },
@@ -51,6 +52,7 @@ export class ProfileComponent implements OnInit {
   userObj1: any;
   dobDate: Date | null = null;
   id = localStorage.getItem('id');
+  
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -88,8 +90,10 @@ export class ProfileComponent implements OnInit {
 
     this.genericApiService.getUserDetails(id, headers)
       .subscribe({
-        next: (value) => {
-          console.log('Response from server:', value);
+        next: (value:any) => {
+          console.log(value.data.id);
+          this.idData = value.data.id;
+          
           this.userObj1 = value;
           this.userObj = this.userObj1.data;
           this.setUserFormData();
