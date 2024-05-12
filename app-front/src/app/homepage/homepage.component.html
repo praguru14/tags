@@ -24,7 +24,7 @@
                             <a class="nav-link" href="#">Shop</a>
                         </li>
                         <li class="nav-item mx-2">
-                            <a class="nav-link" href="#">FAQ</a>
+                            <a class="nav-link" href="profile">FAQ</a>
                         </li>
                         <li class="nav-item mx-2">
                             <a class="nav-link" href="#">About us</a>
@@ -35,9 +35,14 @@
                     </ul>
                     <!-- Login/Signup -->
                     <div class="d-flex justify-content-center align-items-center  flex-lg-row gap-3 flex-column">
-                                    <a class="nav-link text-white" [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a>
+                        <a class="nav-link text-white" [routerLink]="['/login']" routerLinkActive="router-link-active" *ngIf="!authService.isLoggedIn()">Login</a>
                         <a href="#signup" class="text-white text-decoration-none px-3 py-1 rounded-4 signup_cl"
-                            style="background-color: rgb(219, 20, 20)">Signup</a>
+                            style="background-color: rgb(219, 20, 20)" *ngIf="!authService.isLoggedIn()">Signup</a>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center  flex-lg-row gap-3 flex-column" >
+                        <!-- <a class="nav-link text-white" [routerLink]="['/login']" routerLinkActive="router-link-active"></a> -->
+                        <a href="/" class="text-white text-decoration-none px-3 py-1 rounded-4 signup_cl"
+                            style="background-color: rgb(219, 20, 20)" *ngIf="authService.isLoggedIn()" (click)="onLogout()">Logout</a>
                     </div>
                 </div>
             </div>

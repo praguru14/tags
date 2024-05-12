@@ -74,6 +74,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(() => {
         this.fetchUserDetails(this.id);
       });
+      
   }
 
   ngOnDestroy() {
@@ -83,7 +84,7 @@ export class ProfileComponent implements OnInit {
 
   fetchUserDetails(id: any) {
     const headers = this.createAuthHeaders();
-
+    
     if (!headers) {
       return;
     }
@@ -160,8 +161,10 @@ export class ProfileComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.logout();
-  
+    setTimeout(()=>{
+      this.authService.logout();
+    },2000)
+    
   }
 
   onSubmit() {

@@ -76,10 +76,12 @@ export class LoginComponent implements OnInit {
             console.error("Navigation to '/verify' failed:", err);
           });
         } else {
-          this.router.navigate(['/profile']).then(() => {
+          setTimeout(()=>{
+            this.router.navigate(['/profile']).then(() => {
           }).catch(err => {
             console.error("Navigation to '/profile' failed:", err);
           });
+          },400)
         }
       },
       (error) => {
