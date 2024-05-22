@@ -47,7 +47,7 @@
 
 
 
-            <ul class="navbar-nav ml-auto sidebar" *ngIf=" isLoggedIn">
+            <ul class="navbar-nav ml-auto sidebar" *ngIf="true && true">
 
                 <li class="nav-item">
 
@@ -61,7 +61,7 @@
 
                 </li>
 
-            </ul>            
+            </ul>
 
         </div>
 
@@ -72,17 +72,8 @@
 
 
 <div class="main-body">
-
-    <!-- Loading spinner -->
-    <div *ngIf="loading" class="loading-container flex-content-center">
-        <!-- <div>
-            <mat-progress-spinner
-        color="primary"
-        mode="indeterminate">
-        </mat-progress-spinner>
-        </div> -->
+    <!-- <div *ngIf="loading" class="loading-container flex-content-center">
         <div class="loader"></div>
-    </div>
+    </div> -->
     <router-outlet></router-outlet>
-
 </div>

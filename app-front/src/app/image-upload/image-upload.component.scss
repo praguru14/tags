@@ -1,0 +1,63 @@
+.square{
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.row{
+    padding: 5px 5px 5px 5px;
+
+}
+
+.center-text{
+    text-align: center;
+}
+
+.label-text{
+    font-weight: bold;
+    padding: 5px 5px 5px 5px;
+}
+.input-text{
+    padding: 5px 5px 5px 5px;
+}
+.col-md-7\.5 {
+    // flex: 0 0 12.5%;
+    max-width: 6.5%;
+}
+.required {
+    color: red;
+    margin-left: .1px
+    /* Adjust as needed */
+}
+
+input[required]{
+background-image: radial-gradient(#F00 15%, transparent 16%), radial-gradient(#F00 15%, transparent 16%);
+background-size: 1em 1em;
+background-position: right top;
+background-repeat: no-repeat;
+}
+
+.center-text{
+    color: white;
+}
+/* Style the file input to be hidden initially */
+input[type="file"] {
+    display: none;
+}
+
+/* Style the anchor tag to make it look clickable */
+a {
+    cursor: pointer;
+        display: flex;
+    justify-content: center;
+    // display: flex;
+    // width: 100px;
+    // height: 200px;
+    // justify-content: center;
+    // // align-self: flex-end;
+    
+    /* Add additional styles as needed */
+}

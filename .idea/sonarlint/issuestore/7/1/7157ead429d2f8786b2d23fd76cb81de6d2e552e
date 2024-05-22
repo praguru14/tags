@@ -1,0 +1,9 @@
+
+stypescript:S1128"*Remove this unused import of 'Observable'.(‘‚þž8˜„›…ú1J$1514d9a8-e1c0-4d19-a8bc-8b635aff5a3f
+}typescript:S1128"/Remove this unused import of 'ICountryAndCode'.(£ôã¦ÿÿÿÿÿ8˜„›…ú1J$47697efb-7a3a-4dea-919b-2e06cfd2ad0a
+ltypescript:S1250"Remove this commented out code.(òÂ¸Ïúÿÿÿÿ8™„›…ú1J$027ba14f-788e-4ff6-a11e-eea5b2b288b6
+ªtypescript:S6582"[Prefer using an optional chain expression instead, as it's more concise and easier to read.(üÌ²Ïûÿÿÿÿ8š„›…ú1J$368af8ab-3178-4496-b071-26f40a56cb23
+¹typescript:S6606²"jPrefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator.(Ô°ýèùÿÿÿÿ8š„›…ú1J$51896b77-16b9-44ff-9795-4cc070875c49
+¹typescript:S6606²"jPrefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator.(Ô°ýèùÿÿÿÿ8š„›…ú1J$9d5c5b4c-61ac-4eda-914a-1c0ad90752cd
+¹typescript:S6606¶"jPrefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator.(žì–øþÿÿÿÿ8š„›…ú1J$1be0e903-4423-44e9-9798-52f8894ba372
+€typescript:S1874¼"°'(next?: ((value: any) => void) | null | undefined, error?: ((error: any) => void) | null | undefined, complete?: (() => void) | null | undefined): Subscription' is deprecated.(¬Âê“ùÿÿÿÿ8›„›…ú1J$a7c03d03-ee7e-49aa-80e8-84dc00d2a67b

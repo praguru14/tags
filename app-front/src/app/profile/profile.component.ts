@@ -9,6 +9,9 @@ import { HttpHeaders } from '@angular/common/http';
 import { Utility } from '../utility/utility';
 import { jwtDecode } from "jwt-decode";
 import { Observable, Subject } from 'rxjs';
+import { ICountryAndCode } from '../model/ICountryAndCode.model';
+import { countries } from '../utility/countries-data-store';
+
 
 @Component({
   selector: 'app-profile',
@@ -19,17 +22,27 @@ export class ProfileComponent implements OnInit {
   jwtToken: string | null = localStorage.getItem('accessToken');
   submitted = false;
   isReadOnly = true;
+  public countries:any = countries;
+  idData:any;
+  //   countries: ICountryAndCode[] = [
+  //   { code: "+91", name: "India" },
+  //   { code: "+61", name: "Australia" },
+  //   { code: "+1", name: "USA" }
+  // ];
+
+  // selected: ICountryAndCode | undefined;
 
   userForm = this.formBuilder.group({
     firstName: ['', [Validators.required, Validators.minLength(3)]],
-    dob: [''],
+    dob: ['', [Validators.required, Utility.dobFormatValidator()]],
     lastName: ['', [Validators.required, Validators.minLength(3)]],
     phone: [0, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
     email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
     bloodGroup: ['', [Validators.required, Utility.bloodGroupValidator()]]
   });
+
   // // To enable the email form control
-  // this.userForm.get('email')?.enable(); 
+  // this.userForm.get('email')?.enable();
   // { value: '', disabled: true }
 
   // // To disable the email form control
@@ -39,6 +52,7 @@ export class ProfileComponent implements OnInit {
   userObj1: any;
   dobDate: Date | null = null;
   id = localStorage.getItem('id');
+
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -60,6 +74,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(() => {
         this.fetchUserDetails(this.id);
       });
+
   }
 
   ngOnDestroy() {
@@ -76,8 +91,10 @@ export class ProfileComponent implements OnInit {
 
     this.genericApiService.getUserDetails(id, headers)
       .subscribe({
-        next: (value) => {
-          console.log('Response from server:', value);
+        next: (value:any) => {
+          console.log(value.data.id);
+          this.idData = value.data.id;
+
           this.userObj1 = value;
           this.userObj = this.userObj1.data;
           this.setUserFormData();
@@ -144,8 +161,10 @@ export class ProfileComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    setTimeout(()=>{
+      this.authService.logout();
+    },2000)
+
   }
 
   onSubmit() {
@@ -169,6 +188,7 @@ export class ProfileComponent implements OnInit {
     this.genericApiService.addUpdateUserDetails(this.userObj, headers).subscribe(
       (response: any) => {
         console.log('Response from server:', response);
+         window.location.reload();
       },
       (error: any) => {
         console.error('Error from server:', error);

@@ -1,0 +1,19 @@
+
+_
+java:S6813 "BRemove this field injection and use constructor injection instead.(êæÄŞ8¦ı„ú1
+_
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ8¦ı„ú1
+c
+java:S1128"ARemove this unused import 'org.springframework.http.HttpHeaders'.(ãŸñ×úÿÿÿÿ8œ¦ı„ú1
+b
+java:S1128"@Remove this unused import 'org.springframework.http.HttpStatus'.(íŸ¤Šúÿÿÿÿ8¦ı„ú1
+a
+java:S1128"?Remove this unused import 'org.springframework.http.MediaType'.(úŸİ¯şÿÿÿÿ8¦ı„ú1
+f
+java:S1128"DRemove this unused import 'org.springframework.http.ResponseEntity'.(¶¯ø¦úÿÿÿÿ8¦ı„ú1
+l
+java:S1128"ORemove this unused import 'org.springframework.web.bind.annotation.GetMapping'.(‡¡‰Ø8¦ı„ú1
+s
+java:S1128"QRemove this unused import 'org.springframework.web.bind.annotation.PathVariable'.(¹ûñÅşÿÿÿÿ8¦ı„ú1
+L
+java:S1068"*Remove this unused "logger" private field.(“‡Ş¼ùÿÿÿÿ8¦ı„ú1
