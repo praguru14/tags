@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+
 @OpenAPIDefinition(info = @Info(title = "Tags API",version = "0.0.1",description = "Tags api to scan url"))
 public class BackendApplication {
 

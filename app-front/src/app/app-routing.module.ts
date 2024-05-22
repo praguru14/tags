@@ -9,7 +9,7 @@ import { AuthGuard } from './authguard/auth.guard';
 import { VerifyComponent } from './verify/verify.component';
 
 const routes: Routes = [
-  {path: '', component: HomepageComponent},
+  {path: '', redirectTo: 'HomepageComponent', pathMatch: 'full'},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'verify', component: VerifyComponent, canActivate: [AuthGuard] }

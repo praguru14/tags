@@ -1,29 +1,25 @@
 
-`	java:S112p"FDefine and throw a dedicated exception instead of using a generic one.(£ËÔ€şÿÿÿÿ
-a	java:S112£"FDefine and throw a dedicated exception instead of using a generic one.(§¾¸…øÿÿÿÿ
-X
-java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞ
-X
-java:S6813%"BRemove this field injection and use constructor injection instead.(êæÄŞ
-X
-java:S6813'"BRemove this field injection and use constructor injection instead.(êæÄŞ
-X
-java:S6813)"BRemove this field injection and use constructor injection instead.(êæÄŞ
-X
-java:S6813+"BRemove this field injection and use constructor injection instead.(êæÄŞ
-X
-java:S6813-"BRemove this field injection and use constructor injection instead.(êæÄŞ
-X
-java:S6813/"BRemove this field injection and use constructor injection instead.(êæÄŞ
-X
-java:S68131"BRemove this field injection and use constructor injection instead.(êæÄŞ
-Y
-java:S1854J"7Remove this useless assignment to local variable "otp".(Ò•êãûÿÿÿÿ8âÈÓ¿ğ1
-•
-java:S1130H"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(²âŸŞ8ãÈÓ¿ğ1
-J
-java:S1481J"(Remove this unused "otp" local variable.(Ò•êãûÿÿÿÿ8æÈÓ¿ğ1
-]	java:S125U"<This block of commented-out lines of code should be removed.(Ó³¼ßøÿÿÿÿ8ëÈÓ¿ğ1
-]	java:S125j"<This block of commented-out lines of code should be removed.(§ú½àùÿÿÿÿ8ñÈÓ¿ğ1
-K
-java:S2201¬"/The return value of "orElseThrow" must be used.(øìíÿÿÿÿÿ
+†	java:S112p"FDefine and throw a dedicated exception instead of using a generic one.(£ËÔ€şÿÿÿÿJ$defc3ab7-c248-4930-a659-cd34e57f1a1a
+‡	java:S112£"FDefine and throw a dedicated exception instead of using a generic one.(§¾¸…øÿÿÿÿJ$02e526b0-175d-498a-9024-e08ce9697fb9
+~
+java:S6813#"BRemove this field injection and use constructor injection instead.(êæÄŞJ$c6ace3c9-3bf0-4275-bb9f-dd4df2922e00
+~
+java:S6813%"BRemove this field injection and use constructor injection instead.(êæÄŞJ$6f97128e-a962-4a9e-b388-3b23eb55f77a
+~
+java:S6813'"BRemove this field injection and use constructor injection instead.(êæÄŞJ$d22d79c8-0de7-4cf8-b38e-0cf234e7e6a4
+~
+java:S6813)"BRemove this field injection and use constructor injection instead.(êæÄŞJ$ab17ff71-e8e7-462c-8986-72cbdc94d515
+~
+java:S6813+"BRemove this field injection and use constructor injection instead.(êæÄŞJ$0788ed7b-267c-4729-9773-8ddc4605e40a
+~
+java:S6813-"BRemove this field injection and use constructor injection instead.(êæÄŞJ$afcda3ca-3a91-47e1-8863-b5b0d5070d27
+~
+java:S6813/"BRemove this field injection and use constructor injection instead.(êæÄŞJ$340984d4-06cf-4466-8fc1-1cda81bd50f0
+~
+java:S68131"BRemove this field injection and use constructor injection instead.(êæÄŞJ$3f696f81-914a-46c1-af78-df1bda83bd2b
+
+java:S1854J"7Remove this useless assignment to local variable "otp".(Ò•êãûÿÿÿÿ8âÈÓ¿ğ1J$05f86b47-d6c6-499d-b33b-08c5429fdd1e
+p
+java:S1481J"(Remove this unused "otp" local variable.(Ò•êãûÿÿÿÿ8æÈÓ¿ğ1J$566cbc34-af65-41de-97d2-1ff398bbc69b
+ƒ	java:S125U"<This block of commented-out lines of code should be removed.(Ó³¼ßøÿÿÿÿ8ëÈÓ¿ğ1J$e3df5bc9-f039-47af-ad1b-f4977fbc628e
+ƒ	java:S125j"<This block of commented-out lines of code should be removed.(§ú½àùÿÿÿÿ8ñÈÓ¿ğ1J$95047e7c-3dc5-42b1-b1d2-64804fde07ee

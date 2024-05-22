@@ -78,6 +78,9 @@ public class LoginController {
     public ResponseEntity<String> resetPassword(@RequestParam String email,@RequestHeader String newPassword) throws MessagingException {
         return new ResponseEntity<>(loginService.resetPassword(email,newPassword),HttpStatus.OK);
     }
+
+
+
 }
 
 

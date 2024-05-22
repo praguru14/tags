@@ -44,9 +44,17 @@ public class SecurityConfiguration {
                                         "/error",
                                         "/swagger",
                                         "/swagger-ui/index.html",
-                                        "/tag/user-exists-email"
+                                        "/tag/user-exists-email",
+                                        "/tag/*/profile-photo",
+                                        "swagger-ui/index.html",
+                                        "/swagger-ui/**",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui.html",
+                                        "/swagger-resources/**",
+                                        "/webjars/**"
+
                                 ).permitAll()
-                                .requestMatchers("/tag/get-all-users","/tag/fetch-user-by-id","/tag/add-user")
+                                .requestMatchers("/tag/get-all-users","/tag/fetch-user-by-id","/tag/add-user","/tag/fetch-user-by-email")
                                 .authenticated())
                 .sessionManagement(s ->
                         s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -54,7 +62,12 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(l -> l.logoutUrl("/logout")
                         .addLogoutHandler(logoutHandler)
-                        .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext()));
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            {
+                                SecurityContextHolder.clearContext();
+                                response.sendRedirect("/");
+                            }
+                        }));
 
 
 

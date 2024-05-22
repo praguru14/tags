@@ -1,0 +1,7 @@
+<div class="row">
+    <a (click)="selectImage()">
+        <img class="square" [src]="imageUrl" alt="Avatar">
+    </a>
+    <input type="file" #fileInput (change)="handleFileInput($event)" accept="image/*">
+</div>
+

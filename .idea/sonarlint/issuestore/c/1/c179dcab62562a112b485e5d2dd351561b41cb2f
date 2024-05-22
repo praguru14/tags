@@ -1,33 +1,27 @@
 
-<
-java:S1948"&Make "data" transient or serializable.(¼éñ
-G
-java:S1948",Make "emailModel" transient or serializable.(µà¤øÿÿÿÿ
-u
-java:S1450X"ZRemove the "accessToken" field and declare it as a local variable in the relevant methods.(ù‰ôÅøÿÿÿÿ
-i
-java:S1450T"SRemove the "data" field and declare it as a local variable in the relevant methods.(¼éñ
-q
-java:S1450U"VRemove the "message" field and declare it as a local variable in the relevant methods.(ù„è¿ûÿÿÿÿ
-p
-java:S1450V"URemove the "rideId" field and declare it as a local variable in the relevant methods.(Ü½Ã‹üÿÿÿÿ
+b
+java:S1948"&Make "data" transient or serializable.(¼éñJ$8483a9b1-3f84-4b02-9da2-9722a435c72c
+›
+java:S1450^"ZRemove the "accessToken" field and declare it as a local variable in the relevant methods.(ù‰ôÅøÿÿÿÿJ$f2bdb067-ad0d-49e3-8543-0da2ce8cb617
+
+java:S1450Z"SRemove the "data" field and declare it as a local variable in the relevant methods.(¼éñJ$4682c069-95f1-449d-bca5-7405bb2f1f3a
+—
+java:S1450["VRemove the "message" field and declare it as a local variable in the relevant methods.(ù„è¿ûÿÿÿÿJ$7c8351c9-c224-477c-b406-22e54da04b59
+–
+java:S1450\"URemove the "rideId" field and declare it as a local variable in the relevant methods.(Ü½Ã‹üÿÿÿÿJ$9d48bd98-f1e5-4d23-b2b4-f23f769e335d
+‘
+java:S1450Y"URemove the "status" field and declare it as a local variable in the relevant methods.(šŞÇ²J$d399e5be-94bf-451a-8e0d-9a782a0a7e89
+œ
+java:S1450]"[Remove the "totalResults" field and declare it as a local variable in the relevant methods.(âá±¢üÿÿÿÿJ$f1a64a12-d106-4a64-bc37-cbc1c7296dcb
+f
+java:S1068Y"*Remove this unused "status" private field.(šŞÇ²J$568a3bd0-22e4-40ff-92fd-a2da316aeda6
+d
+java:S1068Z"(Remove this unused "data" private field.(¼éñJ$321de019-84a3-4b15-abd6-32eb7ea822da
+l
+java:S1068["+Remove this unused "message" private field.(ù„è¿ûÿÿÿÿJ$f1af0a4b-a2a1-437a-979c-172ecbb8e334
 k
-java:S1450S"URemove the "status" field and declare it as a local variable in the relevant methods.(šŞÇ²
-v
-java:S1450W"[Remove the "totalResults" field and declare it as a local variable in the relevant methods.(âá±¢üÿÿÿÿ
-O
-java:S1128"9Remove this unused import 'com.tag.backend.entity.Login'.(ˆˆ±à
-N
-java:S1128"8Remove this unused import 'com.tag.backend.entity.User'.(Øíä‡
-@
-java:S1068S"*Remove this unused "status" private field.(šŞÇ²
->
-java:S1068T"(Remove this unused "data" private field.(¼éñ
-F
-java:S1068U"+Remove this unused "message" private field.(ù„è¿ûÿÿÿÿ
-E
-java:S1068V"*Remove this unused "rideId" private field.(Ü½Ã‹üÿÿÿÿ
-K
-java:S1068W"0Remove this unused "totalResults" private field.(âá±¢üÿÿÿÿ
-J
-java:S1068X"/Remove this unused "accessToken" private field.(ù‰ôÅøÿÿÿÿ
+java:S1068\"*Remove this unused "rideId" private field.(Ü½Ã‹üÿÿÿÿJ$c30ff5c0-d2d8-4613-8e95-6ff968cfd41d
+q
+java:S1068]"0Remove this unused "totalResults" private field.(âá±¢üÿÿÿÿJ$a997fc8b-1171-43b8-81c1-1585ceb84021
+p
+java:S1068^"/Remove this unused "accessToken" private field.(ù‰ôÅøÿÿÿÿJ$757d2317-7aa9-43b3-a7a3-8bb3a12649c1

@@ -32,6 +32,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Lob
+    private byte[] imageData;
     @NotBlank
     @Size(max = 120)
     @Email
