@@ -24,12 +24,12 @@ export class HomepageComponent {
     this.listenToLoading();
     console.log(this.authService.isLoggedIn());
     console.log(localStorage.getItem('accessToken'));
-    
-    
+
+
   }
 
-  
-  
+
+
   /**
    * Listen to the loadingSub property in the LoadingService class. This drives the
    * display of the loading spinner.
@@ -46,8 +46,8 @@ export class HomepageComponent {
         this.router.navigate(['/'])
       this.authService.logout();
     },2000)
-    
-  
+
+
   }
 
 }

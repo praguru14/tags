@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   });
 
   // // To enable the email form control
-  // this.userForm.get('email')?.enable(); 
+  // this.userForm.get('email')?.enable();
   // { value: '', disabled: true }
 
   // // To disable the email form control
@@ -52,7 +52,7 @@ export class ProfileComponent implements OnInit {
   userObj1: any;
   dobDate: Date | null = null;
   id = localStorage.getItem('id');
-  
+
 
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(() => {
         this.fetchUserDetails(this.id);
       });
-      
+
   }
 
   ngOnDestroy() {
@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
 
   fetchUserDetails(id: any) {
     const headers = this.createAuthHeaders();
-    
+
     if (!headers) {
       return;
     }
@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit {
         next: (value:any) => {
           console.log(value.data.id);
           this.idData = value.data.id;
-          
+
           this.userObj1 = value;
           this.userObj = this.userObj1.data;
           this.setUserFormData();
@@ -164,7 +164,7 @@ export class ProfileComponent implements OnInit {
     setTimeout(()=>{
       this.authService.logout();
     },2000)
-    
+
   }
 
   onSubmit() {

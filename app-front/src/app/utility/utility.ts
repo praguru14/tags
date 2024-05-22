@@ -21,7 +21,7 @@ export class Utility {
         return { invalidBloodGroup: true };
       }
 
-      return null; 
+      return null;
     };
   }
 
