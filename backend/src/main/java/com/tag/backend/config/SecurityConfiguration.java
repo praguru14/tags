@@ -51,10 +51,11 @@ public class SecurityConfiguration {
                                         "/v3/api-docs/**",
                                         "/swagger-ui.html",
                                         "/swagger-resources/**",
+                                        "/tag/get-all-users",
                                         "/webjars/**"
 
                                 ).permitAll()
-                                .requestMatchers("/tag/get-all-users","/tag/fetch-user-by-id","/tag/add-user","/tag/fetch-user-by-email")
+                                .requestMatchers("/tag/fetch-user-by-id","/tag/add-user","/tag/fetch-user-by-email")
                                 .authenticated())
                 .sessionManagement(s ->
                         s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
