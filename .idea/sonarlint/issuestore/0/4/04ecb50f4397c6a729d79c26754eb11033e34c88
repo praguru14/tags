@@ -6,3 +6,11 @@ java:S6813"BRemove this field injection and use constructor injection instead.
 …
 java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8 Õ»Öğ1J$bbec02f9-a1c5-411f-9795-36061642d1fd
 	java:S100#"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ëğ³‘8¥Õ»Öğ1J$94abb342-0bfa-4bb6-b743-25efc3ea58a6
+š
+java:S1130N"xRemove the declaration of thrown exception 'jakarta.mail.MessagingException', as it cannot be thrown from method's body.(£¢‹Õûÿÿÿÿ8öóˆš2
+Y
+java:S1128"<Remove this unused import 'com.tag.backend.model.UserModel'.(¦è¤×8ùóˆš2
+J
+java:S1128".Remove this unused import 'java.util.HashSet'.(Ê‚êX8ùóˆš2
+L
+java:S1128"*Remove this unused import 'java.util.Set'.(ö²„¤şÿÿÿÿ8ùóˆš2

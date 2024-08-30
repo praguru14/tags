@@ -1,4 +1,7 @@
 
+a	java:S112#"FDefine and throw a dedicated exception instead of using a generic one.(Ô–§v8Òöˆš2
+b	java:S112("FDefine and throw a dedicated exception instead of using a generic one.(˜¤åƒ8Òöˆš2
+b	java:S112."FDefine and throw a dedicated exception instead of using a generic one.(áÏÇã8Óöˆš2
 ›
 java:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(ó§ò38º©ı„ú1J$d4fc7c92-6235-470d-87e7-baee7008d9cf
 œ
@@ -9,3 +12,21 @@ java:S2293;"YReplace the type specification in this constructor call with the d
 java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8Ù©ı„ú1J$096feef0-2f93-410d-99b7-f67cce564aeb
 …
 java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8Ù©ı„ú1J$8f0c3b2d-d61f-441d-859e-0556214697fc
+ˆ
+java:S1130#"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(Ô–§v8ıöˆš2
+‰
+java:S1130("lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(˜¤åƒ8÷ˆš2
+‰
+java:S1130."lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(áÏÇã8„÷ˆš2
+_
+java:S1128"BRemove this unused import 'com.tag.backend.model.LocationPayload'.(´ƒÖÅ8”÷ˆš2
+^
+java:S1128	"<Remove this unused import 'com.tag.backend.utils.UtilsFile'.(­åÓşÿÿÿÿ8”÷ˆš2
+`
+java:S1128"DRemove this unused import 'jakarta.servlet.http.HttpServletRequest'.(õ38•÷ˆš2
+p
+java:S1128"TRemove this unused import 'org.springframework.dao.DataIntegrityViolationException'.(ÅÔº(8•÷ˆš2
+v
+java:S1128"YRemove this unused import 'org.springframework.web.context.request.RequestContextHolder'.(ºãê8•÷ˆš2
+z
+java:S1128"]Remove this unused import 'org.springframework.web.context.request.ServletRequestAttributes'.(şĞ‘Ÿ8•÷ˆš2

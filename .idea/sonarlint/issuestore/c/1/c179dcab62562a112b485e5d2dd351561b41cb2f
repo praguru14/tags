@@ -1,6 +1,8 @@
 
 b
 java:S1948"&Make "data" transient or serializable.(¼éñJ$8483a9b1-3f84-4b02-9da2-9722a435c72c
+N
+java:S1948",Make "emailModel" transient or serializable.(µà¤øÿÿÿÿ8ô÷ˆš2
 ›
 java:S1450^"ZRemove the "accessToken" field and declare it as a local variable in the relevant methods.(ù‰ôÅøÿÿÿÿJ$f2bdb067-ad0d-49e3-8543-0da2ce8cb617
 
@@ -13,6 +15,10 @@ java:S1450\"URemove the "rideId" field and declare it as a local variable in th
 java:S1450Y"URemove the "status" field and declare it as a local variable in the relevant methods.(šŞÇ²J$d399e5be-94bf-451a-8e0d-9a782a0a7e89
 œ
 java:S1450]"[Remove the "totalResults" field and declare it as a local variable in the relevant methods.(âá±¢üÿÿÿÿJ$f1a64a12-d106-4a64-bc37-cbc1c7296dcb
+V
+java:S1128"9Remove this unused import 'com.tag.backend.entity.Login'.(ˆˆ±à8‚øˆš2
+U
+java:S1128"8Remove this unused import 'com.tag.backend.entity.User'.(Øíä‡8‚øˆš2
 f
 java:S1068Y"*Remove this unused "status" private field.(šŞÇ²J$568a3bd0-22e4-40ff-92fd-a2da316aeda6
 d
