@@ -145,7 +145,11 @@
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.9.1.2184</version>
 			</plugin>
 		</plugins>
 	</build>
+
 </project>
+
+<!--		mvn clean verify sonar:sonar -Dsonar.projectKey=tags -Dsonar.projectName=tags -Dsonar.host.url=http://localhost:9000 -Dsonar.login=sqp_0d538acd5e6273aa54ef34c9aa6eb4098cb09843-->
