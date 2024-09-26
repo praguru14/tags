@@ -6,7 +6,10 @@ import org.pg.medtag.DTO.*;
 import org.pg.medtag.Entity.*;
 import org.pg.medtag.Model.*;
 import org.pg.medtag.Repository.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
-
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserRepo userRepository;
 
@@ -35,18 +38,16 @@ public class UserService {
     @Autowired
     private MedicalConditionRepository medicalConditionRepository;
 
+    @Scheduled(cron = "*/30 * * * * *")
+    @Transactional
     public List<UserDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
+        logger.info("Scheduled task executed: {} users retrieved", users.size());
         return users.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     @Transactional
     public UserDTO createUser(@Valid UserDTO userDTO) {
-        // Check for existing user by email or phone
-//        if (userRepository.existsByEmail(userDTO.getEmail()) || userRepository.existsByPhone(userDTO.getPhone())) {
-//            throw new IllegalArgumentException("User with this email or phone already exists.");
-//        }
-
         User user = mapToEntity(userDTO);
         User savedUser = userRepository.save(user);
 
