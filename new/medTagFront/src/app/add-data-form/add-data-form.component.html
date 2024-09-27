@@ -1,0 +1,68 @@
+<div class="container mt-5">
+    <!-- Image Upload Icon -->
+    <div class="row">
+        <div class="col-12 text-center mb-3">
+            <label for="imageUpload" class="image-upload-label">
+                <!-- Use an icon (like Font Awesome) or an image -->
+                <img src="../../assets/blank-dp.png" alt="Upload Icon" class="img-fluid clickable-image">
+            </label>
+            <input type="file" id="imageUpload" style="display: none;" (change)="onImageSelected($event)">
+        </div>
+    </div>
+
+<div class="row mb-3">
+    <div class="col-12 text-center">
+       <span class="age-text">Current age is: 25 years 5 months</span>
+    </div>
+</div>
+    <div class="row mb-3 image-spacing"></div>
+
+
+    <form #userForm="ngForm" (ngSubmit)="submitForm(userForm)">
+        <!-- First Row: 4 Fields in One Row -->
+        <div class="row">
+            <!-- Field 1: Email -->
+            <div class="col-md-3">
+                <div class="form-group mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" ngModel name="email"
+                        required>
+                </div>
+            </div>
+
+            <!-- Field 2: Password -->
+            <div class="col-md-3">
+                <div class="form-group mb-3">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" ngModel
+                        name="password" required>
+                </div>
+            </div>
+
+            <!-- Field 3: Phone -->
+            <div class="col-md-3">
+                <div class="form-group mb-3">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="Enter phone number" ngModel
+                        name="phone" required>
+                </div>
+            </div>
+
+            <!-- Field 4: Address -->
+            <div class="col-md-3">
+                <div class="form-group mb-3">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="Enter address" ngModel
+                        name="address" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button (Centered) -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

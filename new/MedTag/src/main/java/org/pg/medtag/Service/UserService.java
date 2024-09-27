@@ -101,11 +101,13 @@ public class UserService {
                 Allergy allergyEntity = new Allergy();
                 allergyEntity.setName(allergy.getName());
                 allergyEntity.setSeverity(allergy.getSeverity());
+                allergyEntity.setDescription(allergy.getDescription());  // Set the new field
                 allergyEntity.setUser(savedUser);
                 allergyRepository.save(allergyEntity);
             });
         }
     }
+
 
     private void saveMedInfos(List<MedInfoDTO> medInfos, User savedUser) {
         if (medInfos != null) {
@@ -165,7 +167,7 @@ public class UserService {
                 .collect(Collectors.toList()));
 
         userDTO.setAllergies(user.getAllergies().stream()
-                .map(a -> new AllergyDTO(a.getId(), a.getName(), a.getSeverity()))
+                .map(a -> new AllergyDTO(a.getId(), a.getName(), a.getSeverity(), a.getDescription()))  // Include description
                 .collect(Collectors.toList()));
 
         userDTO.setMedInfos(user.getMedInfos().stream()

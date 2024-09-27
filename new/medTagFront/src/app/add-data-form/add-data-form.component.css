@@ -1,0 +1,45 @@
+.clickable-image {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+    object-fit: cover;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clickable-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.image-spacing {
+    margin-bottom: 50px;
+}
+
+@media (max-width: 1020px) {
+    .image-spacing {
+        margin-bottom: 10px;
+    }
+
+    .clickable-image {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+.age-text {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+    .age-text {
+        font-size: 0.75rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .age-text {
+        font-size: 0.75rem;
+    }
+}
