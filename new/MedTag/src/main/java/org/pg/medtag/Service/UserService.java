@@ -1,8 +1,10 @@
 package org.pg.medtag.Service;
 
-import jakarta.validation.Valid;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import org.pg.medtag.DTO.*;
-
 import org.pg.medtag.Entity.*;
 import org.pg.medtag.Model.*;
 import org.pg.medtag.Repository.*;
@@ -13,13 +15,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     @Autowired
     private UserRepo userRepository;
 
@@ -38,8 +40,12 @@ public class UserService {
     @Autowired
     private MedicalConditionRepository medicalConditionRepository;
 
-    @Scheduled(cron = "*/30 * * * * *")
+    @Scheduled(cron = "*/45 * * * * *")
     @Transactional
+    @CircuitBreaker(name = "getAllUsersService", fallbackMethod = "getAllUsersFallback")
+    @Retry(name = "getAllUsersService")
+    @RateLimiter(name = "getAllUsersService")
+    @Bulkhead(name = "getAllUsersService", type = Bulkhead.Type.SEMAPHORE)
     public List<UserDTO> getAllUsers() {
         List<User> users = userRepository.findAll();
         logger.info("Scheduled task executed: {} users retrieved", users.size());
@@ -47,7 +53,11 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO createUser(@Valid UserDTO userDTO) {
+    @CircuitBreaker(name = "createUserService", fallbackMethod = "createUserFallback")
+    @Retry(name = "createUserService")
+    @RateLimiter(name = "createUserService")
+    @Bulkhead(name = "createUserService", type = Bulkhead.Type.SEMAPHORE)
+    public UserDTO createUser(UserDTO userDTO) {
         User user = mapToEntity(userDTO);
         User savedUser = userRepository.save(user);
 
@@ -57,6 +67,18 @@ public class UserService {
         return userDTO;
     }
 
+    // Fallback methods
+    public List<UserDTO> getAllUsersFallback(Throwable t) {
+        logger.error("Fallback for getAllUsers: ", t);
+        return List.of();  // Return empty list or a default response
+    }
+
+    public UserDTO createUserFallback(UserDTO userDTO, Throwable t) {
+        logger.error("Fallback for createUser: ", t);
+        return null;  // Return default response or null
+    }
+
+    // Helper methods
     private User mapToEntity(UserDTO userDTO) {
         User user = new User();
         user.setEmail(userDTO.getEmail());
@@ -101,13 +123,12 @@ public class UserService {
                 Allergy allergyEntity = new Allergy();
                 allergyEntity.setName(allergy.getName());
                 allergyEntity.setSeverity(allergy.getSeverity());
-                allergyEntity.setDescription(allergy.getDescription());  // Set the new field
+                allergyEntity.setDescription(allergy.getDescription());
                 allergyEntity.setUser(savedUser);
                 allergyRepository.save(allergyEntity);
             });
         }
     }
-
 
     private void saveMedInfos(List<MedInfoDTO> medInfos, User savedUser) {
         if (medInfos != null) {
@@ -167,7 +188,7 @@ public class UserService {
                 .collect(Collectors.toList()));
 
         userDTO.setAllergies(user.getAllergies().stream()
-                .map(a -> new AllergyDTO(a.getId(), a.getName(), a.getSeverity(), a.getDescription()))  // Include description
+                .map(a -> new AllergyDTO(a.getId(), a.getName(), a.getSeverity(), a.getDescription()))
                 .collect(Collectors.toList()));
 
         userDTO.setMedInfos(user.getMedInfos().stream()
